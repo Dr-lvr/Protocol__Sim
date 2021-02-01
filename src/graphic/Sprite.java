@@ -13,7 +13,14 @@ public class Sprite extends JComponent {
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         Image img1 = Toolkit.getDefaultToolkit().getImage("src/a_images/computer-icon.png");
+
+        //create the network configuration
         g2.drawImage(img1, (this.getWidth()/2)-50, 10, 100, 100, this);
+        g2.drawLine((this.getWidth()/2)-50,(this.getHeight()/4)-50, (this.getWidth()/4)-60, (this.getHeight()/2)-50);
+        g2.drawImage(img1, (this.getWidth()/4)-130, (this.getWidth()/2)-110, 100, 100, this);
+        g2.drawImage(img1, (this.getWidth()/4)*3, (this.getWidth()/2)-110, 100, 100, this);
+        g2.drawImage(img1, (this.getWidth()/2)-50, (this.getWidth()/4)*3-110, 100, 100, this);
+
         g2.finalize();
     }
 }
