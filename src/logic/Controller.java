@@ -15,7 +15,6 @@ import java.util.Vector;
         private Controller theController;
         private Vector<ComputerUnit> myNetwork;//data structure for mapping the network, represent the logic network
 
-        // (!!!) private constructor
         public Controller() {
             //at least initialize data structures
             myNetwork = new Vector<ComputerUnit>();
