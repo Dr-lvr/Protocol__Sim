@@ -30,6 +30,16 @@
             }
         }
 
+        public void drawMessage(Graphics g) {
+
+            Graphics2D g2 = (Graphics2D) g;
+            //load image in cache
+            Image img1 = Toolkit.getDefaultToolkit().getImage("src/a_images/computer-icon.png");
+
+            g2.drawImage(img1, 300, 300, 100, 100, this);
+
+        }
+
         public void paint(Graphics g) {
 
             buildNetwork(4);

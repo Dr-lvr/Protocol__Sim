@@ -16,7 +16,7 @@ public class ControlBar extends JComponent {
         JButton tmp;
 
         Icon icon;
-        String iconStr [] = {"Start", "Stop"};
+        String iconStr [] = {"Start", "Stop", "Settings"};
         for(int i=0; i<iconStr.length; ++i){
             icon = new ImageIcon("src/a_images/"+iconStr[i]+".png");
             tmp = new JButton(icon);
