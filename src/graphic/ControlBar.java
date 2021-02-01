@@ -1,17 +1,19 @@
 package graphic;
 
+import animation.FadingJPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Vector;
 
-public class ControlBar extends JComponent {
+public class ControlBar extends JComponent{
 
     Vector<JButton> myButton;
-    JPanel myPanel;
+    FadingJPanel myPanel;
     public ControlBar(){
 
         int numberOfControls=10;
-        myPanel = new JPanel();
+        myPanel = new FadingJPanel();
         Vector<JButton> myButton = new Vector<JButton>();
         JButton tmp;
 
@@ -28,5 +30,6 @@ public class ControlBar extends JComponent {
         }
         myPanel.setSize(100, 500);
         this.add(myPanel);
+        myPanel.fadeIn();
     }
 }

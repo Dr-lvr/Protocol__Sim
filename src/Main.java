@@ -1,3 +1,4 @@
+import animation.FadingJPanel;
 import graphic.ControlBar;
 import graphic.SpritesPanel;
 
@@ -13,14 +14,13 @@ public class Main {
         frame.getContentPane().add(new SpritesPanel()); //use sprites
         frame.getContentPane().add(new ControlBar());
         frame.setLayout(new GridLayout());
-        /*
+
+        frame.getContentPane().add(new FadingJPanel());
         System.out.println(
-                frame.getContentPane().getComponent(0).getGraphics().drawImage(
-                        img1,
-                        30,
-                        30,
-                        100, 100, frame.getContentPane().getComponent(0)));
-*/
+                frame.getContentPane().getComponent(2));
+
+        FadingJPanel j = (FadingJPanel) frame.getContentPane().getComponent(2);
+
         frame.setSize(590, 500);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
