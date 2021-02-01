@@ -10,8 +10,8 @@ public class Main {
         JFrame frame = new JFrame("Demo");
 
         //two graphic approach
-        frame.add(new Win()); // draw on canvas
-        //frame.getContentPane().add(new Sprite()); //use sprites
+        //frame.add(new Win()); // draw on canvas
+        frame.getContentPane().add(new Sprite()); //use sprites
 
         frame.setSize(590, 500);
         frame.setVisible(true);
