@@ -12,13 +12,13 @@
     import javax.swing.JComponent;
     import javax.swing.JFrame;
 
-    public class Sprite extends JComponent {
+    public class SpritesPanel extends JComponent {
 
         private static int serial;
         private Vector<ComputerUnit> network;
         private Controller ctrl_MainInstance;
 
-        public Sprite(){
+        public SpritesPanel(){
             ++serial;
             ctrl_MainInstance = new Controller();
             network = new Vector<ComputerUnit>();
@@ -50,7 +50,7 @@
                     g2.drawLine((this.getWidth() / 2) - 50, (this.getHeight() / 4) - 50, (this.getWidth() / 4) - 60, (this.getHeight() / 2) - 50);
                     break;
                     case 1:
-                    g2.drawImage(img1, (this.getWidth() / 4) - 130, (this.getWidth() / 2) - 110, 100, 100, this);
+                    g2.drawImage(img1, (this.getWidth() / 4)-130, (this.getWidth() / 2) - 110, 100, 100, this);
                     break;
                     case 2:
                     g2.drawImage(img1, (this.getWidth() / 4) * 3, (this.getWidth() / 2) - 110, 100, 100, this);
