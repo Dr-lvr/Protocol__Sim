@@ -130,9 +130,9 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        inGame();
+        running();
 
-        updateShip();
+        updateNetwork();
         updatePackage();
         updateComputerUnits();
 
@@ -141,14 +141,14 @@ public class Board extends JPanel implements ActionListener {
         repaint();
     }
 
-    private void inGame() {
+    private void running() {
 
         if (!isRunning) {
             timer.stop();
         }
     }
 
-    private void updateShip() {
+    private void updateNetwork() {
 
         if (graphical_computer.isVisible()) {
 
