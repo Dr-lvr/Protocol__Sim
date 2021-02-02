@@ -4,13 +4,13 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphicalComputer extends Sprite {
+public class Graphical_Computer extends Sprite {
 
     private int dx;
     private int dy;
-    private List<GraphicalPackage> packages;
+    private List<Graphical_Package> packages;
 
-    public GraphicalComputer(int x, int y) {
+    public Graphical_Computer(int x, int y) {
         super(x, y);
 
         initGraphicalComputer();
@@ -29,7 +29,7 @@ public class GraphicalComputer extends Sprite {
         y += dy;
     }
 
-    public List<GraphicalPackage> getPackages() {
+    public List<Graphical_Package> getPackages() {
         return packages;
     }
 
@@ -59,7 +59,7 @@ public class GraphicalComputer extends Sprite {
     }
 
     public void sendPackage() {
-        packages.add(new GraphicalPackage(x + width, y + height / 2));
+        packages.add(new Graphical_Package(x + width, y + height / 2));
     }
 
     public void keyReleased(KeyEvent e) {

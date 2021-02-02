@@ -1,5 +1,6 @@
-import animation.sprites.SpriteMover;
+import animation.sprites.PackageSender;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class Main {
@@ -7,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            SpriteMover ex = new SpriteMover();
+            PackageSender ex = new PackageSender();
             ex.setVisible(true);
         });
     }

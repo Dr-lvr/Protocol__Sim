@@ -1,4 +1,4 @@
-package animation.fading;
+package animation.controlPanel;
 
 import java.awt.event.ActionEvent;
 

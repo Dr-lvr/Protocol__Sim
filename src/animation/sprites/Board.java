@@ -16,7 +16,7 @@ public class Board extends JPanel implements ActionListener {
 
     private final int DELAY = 10;
     private Timer timer;
-    private GraphicalComputer computerUnit;
+    private Graphical_Computer computerUnit;
 
     public Board() {
 
@@ -31,7 +31,7 @@ public class Board extends JPanel implements ActionListener {
 
         int ICRAFT_X = 40;
         int ICRAFT_Y = 60;
-        computerUnit = new GraphicalComputer(ICRAFT_X, ICRAFT_Y);
+        computerUnit = new Graphical_Computer(ICRAFT_X, ICRAFT_Y);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -53,9 +53,9 @@ public class Board extends JPanel implements ActionListener {
         g2d.drawImage(computerUnit.getImage(), computerUnit.getX(),
                 computerUnit.getY(), this);
 
-        List<GraphicalPackage> packages = computerUnit.getPackages();
+        List<Graphical_Package> packages = computerUnit.getPackages();
 
-        for (GraphicalPackage aPackage : packages) {
+        for (Graphical_Package aPackage : packages) {
 
             g2d.drawImage(aPackage.getImage(), aPackage.getX(),
                     aPackage.getY(), this);
@@ -73,11 +73,11 @@ public class Board extends JPanel implements ActionListener {
 
     private void updatePackage() {
 
-        List<GraphicalPackage> packages = computerUnit.getPackages();
+        List<Graphical_Package> packages = computerUnit.getPackages();
 
         for (int i = 0; i < packages.size(); i++) {
 
-            GraphicalPackage aPackage = packages.get(i);
+            Graphical_Package aPackage = packages.get(i);
 
             if (aPackage.isVisible()) {
 
