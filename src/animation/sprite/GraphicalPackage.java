@@ -8,10 +8,10 @@ public class GraphicalPackage extends Sprite {
     public GraphicalPackage(int x, int y) {
         super(x, y);
 
-        initMissile();
+        initPackage();
     }
 
-    private void initMissile() {
+    private void initPackage() {
 
         loadImage("src/a_images/Package.png");
         getImageDimensions();

@@ -65,13 +65,13 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        updateMissiles();
-        updateSpaceShip();
+        updatePackage();
+        updateComputer();
 
         repaint();
     }
 
-    private void updateMissiles() {
+    private void updatePackage() {
 
         List<GraphicalPackage> missiles = spaceShip.getPackages();
 
@@ -89,7 +89,7 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    private void updateSpaceShip() {
+    private void updateComputer() {
 
         spaceShip.move();
     }
