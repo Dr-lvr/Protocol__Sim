@@ -18,7 +18,7 @@ public class Board extends JPanel implements ActionListener {
     private final int ICRAFT_Y = 60;
     private final int DELAY = 10;
     private Timer timer;
-    private SpaceShip spaceShip;
+    private GraphicalComputer spaceShip;
 
     public Board() {
 
@@ -31,7 +31,7 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.WHITE);
         setFocusable(true);
 
-        spaceShip = new SpaceShip(ICRAFT_X, ICRAFT_Y);
+        spaceShip = new GraphicalComputer(ICRAFT_X, ICRAFT_Y);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -53,9 +53,9 @@ public class Board extends JPanel implements ActionListener {
         g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
                 spaceShip.getY(), this);
 
-        List<Missile> missiles = spaceShip.getMissiles();
+        List<GraphicalPackage> missiles = spaceShip.getPackages();
 
-        for (Missile missile : missiles) {
+        for (GraphicalPackage missile : missiles) {
 
             g2d.drawImage(missile.getImage(), missile.getX(),
                     missile.getY(), this);
@@ -73,11 +73,11 @@ public class Board extends JPanel implements ActionListener {
 
     private void updateMissiles() {
 
-        List<Missile> missiles = spaceShip.getMissiles();
+        List<GraphicalPackage> missiles = spaceShip.getPackages();
 
         for (int i = 0; i < missiles.size(); i++) {
 
-            Missile missile = missiles.get(i);
+            GraphicalPackage missile = missiles.get(i);
 
             if (missile.isVisible()) {
 

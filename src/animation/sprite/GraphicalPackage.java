@@ -1,11 +1,11 @@
 package animation.sprite;
 
-public class Missile extends Sprite {
+public class GraphicalPackage extends Sprite {
 
     private final int BOARD_WIDTH = 390;
     private final int MISSILE_SPEED = 2;
 
-    public Missile(int x, int y) {
+    public GraphicalPackage(int x, int y) {
         super(x, y);
 
         initMissile();

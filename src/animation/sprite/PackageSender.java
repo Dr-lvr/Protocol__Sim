@@ -3,9 +3,9 @@ package animation.sprite;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class ShootingMissilesEx extends JFrame {
+public class PackageSender extends JFrame {
 
-    public ShootingMissilesEx() {
+    public PackageSender() {
 
         initUI();
     }
@@ -15,7 +15,7 @@ public class ShootingMissilesEx extends JFrame {
         add(new Board());
 
         setSize(400, 300);
-        setResizable(false);
+        setResizable(true);
 
         setTitle("Shooting missiles");
         setLocationRelativeTo(null);
@@ -25,7 +25,7 @@ public class ShootingMissilesEx extends JFrame {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            ShootingMissilesEx ex = new ShootingMissilesEx();
+            PackageSender ex = new PackageSender();
             ex.setVisible(true);
         });
     }

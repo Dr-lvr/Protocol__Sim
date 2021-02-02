@@ -4,21 +4,21 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpaceShip extends Sprite {
+public class GraphicalComputer extends Sprite {
 
     private int dx;
     private int dy;
-    private List<Missile> missiles;
+    private List<GraphicalPackage> packages;
 
-    public SpaceShip(int x, int y) {
+    public GraphicalComputer(int x, int y) {
         super(x, y);
 
-        initSpaceShip();
+        initGraphicalComputer();
     }
 
-    private void initSpaceShip() {
+    private void initGraphicalComputer() {
 
-        missiles = new ArrayList<>();
+        packages = new ArrayList<>();
 
         loadImage("src/a_images/computer-icon.png");
         getImageDimensions();
@@ -29,8 +29,8 @@ public class SpaceShip extends Sprite {
         y += dy;
     }
 
-    public List<Missile> getMissiles() {
-        return missiles;
+    public List<GraphicalPackage> getPackages() {
+        return packages;
     }
 
     public void keyPressed(KeyEvent e) {
@@ -59,7 +59,7 @@ public class SpaceShip extends Sprite {
     }
 
     public void fire() {
-        missiles.add(new Missile(x + width, y + height / 2));
+        packages.add(new GraphicalPackage(x + width, y + height / 2));
     }
 
     public void keyReleased(KeyEvent e) {
