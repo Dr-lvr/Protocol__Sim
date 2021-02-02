@@ -9,7 +9,6 @@ public class PackageSender extends JFrame {
 
         initUI();
     }
-
     private void initUI() {
 
         add(new Board());
@@ -17,7 +16,7 @@ public class PackageSender extends JFrame {
         setSize(400, 300);
         setResizable(true);
 
-        setTitle("Shooting missiles");
+        setTitle("Package Sender");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
