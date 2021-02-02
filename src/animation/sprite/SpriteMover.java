@@ -3,9 +3,9 @@ package animation.sprite;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class AnimatedFrame extends JFrame {
+public class SpriteMover extends JFrame {
 
-    public AnimatedFrame() {
+    public SpriteMover() {
 
         initUI();
     }
@@ -21,4 +21,6 @@ public class AnimatedFrame extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+
 }

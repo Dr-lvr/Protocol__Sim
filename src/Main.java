@@ -1,9 +1,5 @@
-import animation.fading.FadingJPanel;
-import animation.sprite.AnimatedFrame;
-import graphic.ControlBar;
-import graphic.SpritesPanel;
+import animation.sprite.SpriteMover;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class Main {
@@ -11,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            AnimatedFrame ex = new AnimatedFrame();
+            SpriteMover ex = new SpriteMover();
             ex.setVisible(true);
         });
     }

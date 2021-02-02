@@ -14,7 +14,7 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
-    private Sprite spaceShip;
+    private SpaceShip spaceShip;
     private final int DELAY = 10;
 
     public Board() {
@@ -25,10 +25,10 @@ public class Board extends JPanel implements ActionListener {
     private void initBoard() {
 
         addKeyListener(new TAdapter());
-        setBackground(Color.black);
+        setBackground(Color.white);
         setFocusable(true);
 
-        spaceShip = new Sprite();
+        spaceShip = new SpaceShip();
 
         timer = new Timer(DELAY, this);
         timer.start();
