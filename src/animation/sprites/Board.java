@@ -14,8 +14,6 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int ICRAFT_X = 40;
-    private final int ICRAFT_Y = 60;
     private final int DELAY = 10;
     private Timer timer;
     private GraphicalComputer computerUnit;
@@ -31,6 +29,8 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.WHITE);
         setFocusable(true);
 
+        int ICRAFT_X = 40;
+        int ICRAFT_Y = 60;
         computerUnit = new GraphicalComputer(ICRAFT_X, ICRAFT_Y);
 
         timer = new Timer(DELAY, this);
