@@ -21,12 +21,4 @@ public class PackageSender extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {
-            PackageSender ex = new PackageSender();
-            ex.setVisible(true);
-        });
-    }
 }

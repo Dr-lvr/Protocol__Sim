@@ -21,6 +21,4 @@ public class SpriteMover extends JFrame {
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
 }
