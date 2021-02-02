@@ -1,21 +1,23 @@
 package animation.sprites;
 
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class PackageSender extends JFrame {
+public class Collision extends JFrame {
 
-    public PackageSender() {
+    public Collision() {
 
         initUI();
     }
+
     private void initUI() {
 
         add(new Board());
 
-        setSize(400, 300);
-        setResizable(true);
+        setResizable(false);
+        pack();
 
-        setTitle("Package Sender");
+        setTitle("Collision");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

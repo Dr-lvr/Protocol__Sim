@@ -13,20 +13,28 @@ public class Graphical_Computer extends Sprite {
     public Graphical_Computer(int x, int y) {
         super(x, y);
 
-        initGraphicalComputer();
+        initCraft();
     }
 
-    private void initGraphicalComputer() {
+    private void initCraft() {
 
         packages = new ArrayList<>();
-
         loadImage("src/a_images/computer-icon.png");
         getImageDimensions();
     }
 
     public void move() {
+
         x += dx;
         y += dy;
+
+        if (x < 1) {
+            x = 1;
+        }
+
+        if (y < 1) {
+            y = 1;
+        }
     }
 
     public List<Graphical_Package> getPackages() {
@@ -38,7 +46,7 @@ public class Graphical_Computer extends Sprite {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_SPACE) {
-            sendPackage();
+            fire();
         }
 
         if (key == KeyEvent.VK_LEFT) {
@@ -58,7 +66,7 @@ public class Graphical_Computer extends Sprite {
         }
     }
 
-    public void sendPackage() {
+    public void fire() {
         packages.add(new Graphical_Package(x + width, y + height / 2));
     }
 

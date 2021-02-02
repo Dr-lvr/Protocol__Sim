@@ -2,8 +2,8 @@ package animation.sprites;
 
 public class Graphical_Package extends Sprite {
 
-    private final int BOARD_WIDTH = 390;
-    private final int MISSILE_SPEED = 2;
+    private final int BOARD_WIDTH = 1000;
+    private final int PACKAGE_SPEED = 2;
 
     public Graphical_Package(int x, int y) {
         super(x, y);
@@ -19,10 +19,9 @@ public class Graphical_Package extends Sprite {
 
     public void move() {
 
-        x += MISSILE_SPEED;
+        x += PACKAGE_SPEED;
 
-        if (x > BOARD_WIDTH) {
+        if (x > BOARD_WIDTH)
             visible = false;
-        }
     }
 }
