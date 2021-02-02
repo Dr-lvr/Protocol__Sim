@@ -1,4 +1,4 @@
-package animation;
+package animation.fading;
 
 import java.awt.event.ActionEvent;
 

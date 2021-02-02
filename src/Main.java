@@ -1,4 +1,4 @@
-import animation.FadingJPanel;
+import animation.fading.FadingJPanel;
 import graphic.ControlBar;
 import graphic.SpritesPanel;
 

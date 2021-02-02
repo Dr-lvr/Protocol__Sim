@@ -1,6 +1,6 @@
 package graphic;
 
-import animation.FadingJPanel;
+import animation.fading.FadingJPanel;
 
 import javax.swing.*;
 import java.awt.*;
