@@ -1,4 +1,4 @@
-package animation.sprite;
+package animation.sprites;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -18,7 +18,7 @@ public class Board extends JPanel implements ActionListener {
     private final int ICRAFT_Y = 60;
     private final int DELAY = 10;
     private Timer timer;
-    private GraphicalComputer spaceShip;
+    private GraphicalComputer computerUnit;
 
     public Board() {
 
@@ -31,7 +31,7 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.WHITE);
         setFocusable(true);
 
-        spaceShip = new GraphicalComputer(ICRAFT_X, ICRAFT_Y);
+        computerUnit = new GraphicalComputer(ICRAFT_X, ICRAFT_Y);
 
         timer = new Timer(DELAY, this);
         timer.start();
@@ -50,15 +50,15 @@ public class Board extends JPanel implements ActionListener {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawImage(spaceShip.getImage(), spaceShip.getX(),
-                spaceShip.getY(), this);
+        g2d.drawImage(computerUnit.getImage(), computerUnit.getX(),
+                computerUnit.getY(), this);
 
-        List<GraphicalPackage> missiles = spaceShip.getPackages();
+        List<GraphicalPackage> packages = computerUnit.getPackages();
 
-        for (GraphicalPackage missile : missiles) {
+        for (GraphicalPackage aPackage : packages) {
 
-            g2d.drawImage(missile.getImage(), missile.getX(),
-                    missile.getY(), this);
+            g2d.drawImage(aPackage.getImage(), aPackage.getX(),
+                    aPackage.getY(), this);
         }
     }
 
@@ -73,37 +73,37 @@ public class Board extends JPanel implements ActionListener {
 
     private void updatePackage() {
 
-        List<GraphicalPackage> missiles = spaceShip.getPackages();
+        List<GraphicalPackage> packages = computerUnit.getPackages();
 
-        for (int i = 0; i < missiles.size(); i++) {
+        for (int i = 0; i < packages.size(); i++) {
 
-            GraphicalPackage missile = missiles.get(i);
+            GraphicalPackage aPackage = packages.get(i);
 
-            if (missile.isVisible()) {
+            if (aPackage.isVisible()) {
 
-                missile.move();
+                aPackage.move();
             } else {
 
-                missiles.remove(i);
+                packages.remove(i);
             }
         }
     }
 
     private void updateComputer() {
 
-        spaceShip.move();
+        computerUnit.move();
     }
 
     private class TAdapter extends KeyAdapter {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            spaceShip.keyReleased(e);
+            computerUnit.keyReleased(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
-            spaceShip.keyPressed(e);
+            computerUnit.keyPressed(e);
         }
     }
 }

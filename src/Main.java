@@ -1,4 +1,4 @@
-import animation.sprite.SpriteMover;
+import animation.sprites.SpriteMover;
 
 import java.awt.*;
 

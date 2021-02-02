@@ -1,6 +1,5 @@
-package animation.sprite;
+package animation.sprites;
 
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 public class PackageSender extends JFrame {

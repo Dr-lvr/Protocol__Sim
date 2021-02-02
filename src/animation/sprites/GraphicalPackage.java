@@ -1,4 +1,4 @@
-package animation.sprite;
+package animation.sprites;
 
 public class GraphicalPackage extends Sprite {
 

@@ -1,4 +1,4 @@
-package animation.sprite;
+package animation.sprites;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;

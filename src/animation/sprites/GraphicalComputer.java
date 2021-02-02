@@ -1,4 +1,4 @@
-package animation.sprite;
+package animation.sprites;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class GraphicalComputer extends Sprite {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_SPACE) {
-            fire();
+            sendPackage();
         }
 
         if (key == KeyEvent.VK_LEFT) {
@@ -58,7 +58,7 @@ public class GraphicalComputer extends Sprite {
         }
     }
 
-    public void fire() {
+    public void sendPackage() {
         packages.add(new GraphicalPackage(x + width, y + height / 2));
     }
 
