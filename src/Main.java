@@ -1,4 +1,5 @@
 import animation.fading.FadingJPanel;
+import animation.sprite.AnimatedFrame;
 import graphic.ControlBar;
 import graphic.SpritesPanel;
 
@@ -7,6 +8,16 @@ import java.awt.*;
 
 public class Main {
 
+    public static void main(String[] args) {
+
+        EventQueue.invokeLater(() -> {
+            AnimatedFrame ex = new AnimatedFrame();
+            ex.setVisible(true);
+        });
+    }
+}
+
+    /*
     public static void main(String[] args) {
 
         JFrame frame = new JFrame("Demo");
@@ -32,8 +43,8 @@ public class Main {
                 300,
                 100, 100, frame.getContentPane().getComponent(0));
 
- */
+ *//*
         frame.getContentPane().getComponent(0).setBackground(Color.cyan);
         frame.validate();
     }
-}
+}*/
