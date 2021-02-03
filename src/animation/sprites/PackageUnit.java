@@ -10,7 +10,9 @@ public class PackageUnit extends Sprite {
     private final int BOARD_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     private final int PACKAGE_SPEED = 2;
 
-    private int direction;
+    private int direction;//must be Enum or a kind of
+    //this is a temporary solution, movement must be relative
+    //implemented by vectors ex. pack.go(a, b)
 
     public PackageUnit(int x, int y) {
         super(x, y);
@@ -26,6 +28,7 @@ public class PackageUnit extends Sprite {
         getImageDimensions();
     }
     public void move() {
+
         Random gen = new Random();
         switch(getDirection()){
             case 0:

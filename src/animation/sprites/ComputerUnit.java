@@ -46,6 +46,8 @@ public class ComputerUnit extends Sprite {
     }
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
+
+        //fire packets
         Random gen = new Random();
         if (key == KeyEvent.VK_SPACE) {
             fire(gen.nextInt(3));

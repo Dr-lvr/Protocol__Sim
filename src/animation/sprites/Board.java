@@ -185,6 +185,8 @@ public class Board extends JPanel implements ActionListener {
                     if (r1.intersects(r2)) {
                         m.setVisible(false);
                         //computerUnit.setVisible(false);
+
+                        //shunting-sorting-switching packets
                         Random gen = new Random();
                         computerUnit.fire(gen.nextInt(3));
                     }
