@@ -9,7 +9,6 @@
     import java.util.List;
 
         public class ComputerUnit extends Sprite {
-
             private int dx;
             private int dy;
            // private List<PackageUnit> packages;
