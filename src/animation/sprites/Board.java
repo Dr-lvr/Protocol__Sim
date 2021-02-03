@@ -200,9 +200,14 @@ public class Board extends JPanel implements ActionListener {
                         m.setVisible(false);
                         //computerUnit.setVisible(false);
 
-                        //shunting-sorting-switching packets
-                        //Random gen = new Random();
-                        computerUnit.fire(m.getDirection());
+                        //manage packets then send it
+                        //
+                        //
+                        if(m.getDirection()<4){
+                            computerUnit.fire(m.getDirection()+4);
+                        } else {
+                            computerUnit.fire(m.getDirection()-4);
+                        }
                     }
                 }
             }

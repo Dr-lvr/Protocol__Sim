@@ -13,7 +13,6 @@ public class Package extends Sprite {
     private int direction;//must be Enum or a kind of
     //this is a temporary solution, movement must be relative
     //implemented by vectors ex. pack.go(a, b)
-
     public Package(int x, int y) {
         super(x, y);
         initPackage();
