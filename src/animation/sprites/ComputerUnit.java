@@ -1,7 +1,11 @@
 package animation.sprites;
 
+import a_provider.Direction;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.*;
+import java.util.List;
 
 public class ComputerUnit extends Sprite {
 
@@ -10,6 +14,7 @@ public class ComputerUnit extends Sprite {
    // private List<PackageUnit> packages;
     private Vector<PackageUnit> packageOut;
     private Deque<PackageUnit> packageIn;//double ended queue
+    private Vector<WireLock> wireLocks;
 
     public ComputerUnit(int x, int y) {
         super(x, y);
@@ -19,6 +24,7 @@ public class ComputerUnit extends Sprite {
         //packages = new ArrayList<>();
         packageOut = new Vector<>();
         packageIn = new ArrayDeque<>();
+        wireLocks = new Vector<>(8);
         loadImage("src/a_images/computer-icon.png");
         getImageDimensions();
     }
@@ -87,6 +93,88 @@ public class ComputerUnit extends Sprite {
         }
         if (key == KeyEvent.VK_DOWN) {
             dy = 0;
+        }
+    }
+    public void initWireLock(){
+//UP_LEFT, UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT
+        Rectangle collider = this.getBounds();
+        for(int i=0; i< wireLocks.size(); ++i){
+            wireLocks.get(i).setLocked(false);
+            switch(i){
+                case 0:
+                    wireLocks.get(i).setX(collider.x);
+                    wireLocks.get(i).setY(collider.y);
+                    wireLocks.get(i).setRelativePosition(Direction.UP_LEFT);
+                    break;
+                case 1:
+                    wireLocks.get(i).setX(collider.x + collider.width/2);
+                    wireLocks.get(i).setY(collider.y);
+                    wireLocks.get(i).setRelativePosition(Direction.UP);
+                    break;
+                case 2:
+                    wireLocks.get(i).setX(collider.x + collider.width);
+                    wireLocks.get(i).setY(collider.y);
+                    wireLocks.get(i).setRelativePosition(Direction.UP_RIGHT);
+                    break;
+                case 3:
+                    wireLocks.get(i).setX(collider.x + collider.width);
+                    wireLocks.get(i).setY(collider.y + collider.height/2);
+                    wireLocks.get(i).setRelativePosition(Direction.RIGHT);
+                    break;
+                case 4:
+                    wireLocks.get(i).setX(collider.x + collider.width);
+                    wireLocks.get(i).setY(collider.y + collider.height);
+                    wireLocks.get(i).setRelativePosition(Direction.DOWN_RIGHT);
+                    break;
+                case 5:
+                    wireLocks.get(i).setX(collider.x + collider.width/2);
+                    wireLocks.get(i).setY(collider.y + collider.height);
+                    wireLocks.get(i).setRelativePosition(Direction.DOWN);
+                    break;
+                case 6:
+                    wireLocks.get(i).setX(collider.x);
+                    wireLocks.get(i).setY(collider.y + collider.height);
+                    wireLocks.get(i).setRelativePosition(Direction.DOWN_LEFT);
+                    break;
+                case 7:
+                    wireLocks.get(i).setX(collider.x);
+                    wireLocks.get(i).setY(collider.y + collider.height/2);
+                    wireLocks.get(i).setRelativePosition(Direction.LEFT);
+                    break;
+            }
+        }
+    }
+    private class WireLock {
+
+        private Direction relativePosition;
+        private int x, y;
+        private boolean locked;
+
+        public WireLock(int x, int y, boolean locked) {
+            this.x = x;
+            this.y = y;
+            this.locked = locked;
+        }
+        public int getX() {
+            return x;
+        }
+        public void setX(int x) {
+            this.x = x;
+        }
+        public int getY() {
+            return y;
+        }
+        public void setY(int y) {
+            this.y = y;
+        }
+        public boolean isLocked() {
+            return locked;
+        }
+        public void setLocked(boolean locked) {
+            this.locked = locked;
+        }
+        public void setRelativePosition(Direction relativePosition) {
+            this.relativePosition = relativePosition;
         }
     }
 }

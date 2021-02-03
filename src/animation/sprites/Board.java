@@ -100,7 +100,7 @@ public class Board extends JPanel implements ActionListener {
                 g.drawImage(graphical_computer.getImage(), graphical_computer.getX(), graphical_computer.getY(), this);
             }
         }
-        g.setColor(Color.WHITE);
+        g.setColor(Color.black);
         g.drawString("Computers left: " + graphical_computer.size(), 5, 15);
     }
     private void drawGameOver(Graphics g) {
