@@ -19,7 +19,6 @@ public class ConfigProvider {
         }
         return theProvider;
     }
-
     public Vector<ComputerUnit> getTokenRing(){
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -28,33 +27,17 @@ public class ConfigProvider {
         theNetwork.add(new ComputerUnit((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)));
         theNetwork.add(new ComputerUnit((int) (screenSize.getWidth()/4)*3, (int) screenSize.getHeight()/2));
         theNetwork.add(new ComputerUnit((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)*3));
-
-        for(int i=0; i<theNetwork.size(); ++i){
-            theNetwork.get(i).initWireLock();
-                switch(i) {
-                    case 0:
-                        theNetwork.get(i).getLocks().get(2).setLocked(true);
-                        theNetwork.get(i).addConnections(theNetwork.get(1));
-                        theNetwork.get(i).getLocks().get(4).setLocked(true);
-                        theNetwork.get(i).addConnections(theNetwork.get(3));
-                        break;
-                    case 1:
-                        theNetwork.get(i).getLocks().get(6).setLocked(true);
-                        theNetwork.get(i).getLocks().get(4).setLocked(true);
-                        break;
-                    case 2:
-                        theNetwork.get(i).getLocks().get(0).setLocked(true);
-                        theNetwork.get(i).getLocks().get(6).setLocked(true);
-                        break;
-                    case 3:
-                        theNetwork.get(i).getLocks().get(0).setLocked(true);
-                        theNetwork.get(i).getLocks().get(2).setLocked(true);
-                        break;
-                    default:
-                        break;
-
-                }
+        for(ComputerUnit tn : theNetwork){
+            tn.initWireLock();
         }
+        theNetwork.get(0).addConnections(2, theNetwork.get(1).getLocks().get(6));
+        theNetwork.get(1).addConnections(6, theNetwork.get(0).getLocks().get(2));
+        theNetwork.get(1).addConnections(4, theNetwork.get(2).getLocks().get(0));
+        theNetwork.get(2).addConnections(0, theNetwork.get(1).getLocks().get(4));
+        theNetwork.get(2).addConnections(6, theNetwork.get(3).getLocks().get(2));
+        theNetwork.get(3).addConnections(2, theNetwork.get(2).getLocks().get(6));
+        theNetwork.get(3).addConnections(0, theNetwork.get(0).getLocks().get(4));
+        theNetwork.get(0).addConnections(4, theNetwork.get(3).getLocks().get(0));
         return theNetwork;
     }
 }

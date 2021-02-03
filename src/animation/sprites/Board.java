@@ -2,6 +2,7 @@ package animation.sprites;
 
 
 import a_provider.ConfigProvider;
+import a_provider.WireLock;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -94,9 +96,12 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
         }
-        for (ComputerUnit graphical_computer : graphical_computer) {
-            if (graphical_computer.isVisible()) {
-                g.drawImage(graphical_computer.getImage(), graphical_computer.getX(), graphical_computer.getY(), this);
+        for (ComputerUnit gp : graphical_computer) {
+            if (gp.isVisible()) {
+                g.drawImage(gp.getImage(), gp.getX(), gp.getY(), this);
+                for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
+                    g.drawLine(entry.getKey().getX(), entry.getKey().getY(), entry.getValue().getX(), entry.getValue().getY());
+                }
             }
         }
         g.setColor(Color.black);
