@@ -5,7 +5,7 @@ import a_provider.Direction;
 import java.awt.*;
 import java.util.Random;
 
-public class PackageUnit extends Sprite {
+public class Package extends Sprite {
 
     private final int BOARD_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     private final int PACKAGE_SPEED = 2;
@@ -14,11 +14,11 @@ public class PackageUnit extends Sprite {
     //this is a temporary solution, movement must be relative
     //implemented by vectors ex. pack.go(a, b)
 
-    public PackageUnit(int x, int y) {
+    public Package(int x, int y) {
         super(x, y);
         initPackage();
     }
-    public PackageUnit(int x, int y, int direction) {
+    public Package(int x, int y, int direction) {
         super(x, y);
         initPackage();
         this.direction = direction;

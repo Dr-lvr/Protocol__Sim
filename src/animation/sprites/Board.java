@@ -28,7 +28,7 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     //private Graphical_Computer graphical_computer;
     //private List<Graphical_Computer> theNetwork;
-    private Vector<ComputerUnit> graphical_computer;
+    private Vector<Device> graphical_computer;
     private boolean isRunning;
     private final int ICRAFT_X = 40;
     private final int ICRAFT_Y = 60;
@@ -84,20 +84,20 @@ public class Board extends JPanel implements ActionListener {
     }
     private synchronized void drawObjects(Graphics g) {
         // draw network
-        for(ComputerUnit g_cp : graphical_computer) {
+        for(Device g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
                 g.drawImage(g_cp.getImage(), g_cp.getX(), g_cp.getY(),
                         this);
             }
-            List<PackageUnit> ms = g_cp.getPackageOut();
-            for (PackageUnit aPackage : ms) {
+            List<Package> ms = g_cp.getPackageOut();
+            for (Package aPackage : ms) {
                 if (aPackage.isVisible()) {
                     g.drawImage(aPackage.getImage(), aPackage.getX(),
                             aPackage.getY(), this);
                 }
             }
         }
-        for (ComputerUnit gp : graphical_computer) {
+        for (Device gp : graphical_computer) {
             if (gp.isVisible()) {
                 g.drawImage(gp.getImage(), gp.getX(), gp.getY(), this);
                 for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
@@ -139,17 +139,17 @@ public class Board extends JPanel implements ActionListener {
         }
     }
     private synchronized void updateNetwork() {
-        for(ComputerUnit g_cp : graphical_computer) {
+        for(Device g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
                 g_cp.move();
             }
         }
     }
     private synchronized void updatePackage() {
-        for(ComputerUnit g_cp : graphical_computer) {
-            List<PackageUnit> ms = g_cp.getPackageOut();
+        for(Device g_cp : graphical_computer) {
+            List<Package> ms = g_cp.getPackageOut();
             for (int i = 0; i < ms.size(); i++) {
-                PackageUnit m = ms.get(i);
+                Package m = ms.get(i);
                 if (m.isVisible()) {
                     m.move();
                 } else {
@@ -164,7 +164,7 @@ public class Board extends JPanel implements ActionListener {
             return;
         }
         for (int i = 0; i < graphical_computer.size(); i++) {
-            ComputerUnit a = graphical_computer.get(i);
+            Device a = graphical_computer.get(i);
             if (a.isVisible()) {
                 a.move();
             } else {
@@ -190,11 +190,11 @@ public class Board extends JPanel implements ActionListener {
         }*/
 
         //Sender -> Package -> Receiver
-        for(ComputerUnit g_cp : graphical_computer) {
-            List<PackageUnit> ms = g_cp.getPackageOut();
-            for (PackageUnit m : ms) {//<---------------
+        for(Device g_cp : graphical_computer) {
+            List<Package> ms = g_cp.getPackageOut();
+            for (Package m : ms) {//<---------------
                 Rectangle r1 = m.getBounds();
-                for (ComputerUnit computerUnit : graphical_computer) {
+                for (Device computerUnit : graphical_computer) {
                     Rectangle r2 = computerUnit.getBounds();
                     if (r1.intersects(r2)) {
                         m.setVisible(false);

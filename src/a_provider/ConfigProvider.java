@@ -1,6 +1,6 @@
 package a_provider;
 
-import animation.sprites.ComputerUnit;
+import animation.sprites.Device;
 
 import java.awt.*;
 import java.util.*;
@@ -19,15 +19,15 @@ public class ConfigProvider {
         }
         return theProvider;
     }
-    public Vector<ComputerUnit> getTokenRing(){
+    public Vector<Device> getTokenRing(){
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Vector<ComputerUnit> theNetwork = new Vector<ComputerUnit>();
-        theNetwork.add(new ComputerUnit((int) screenSize.getWidth()/4, (int) screenSize.getHeight()/2));
-        theNetwork.add(new ComputerUnit((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)));
-        theNetwork.add(new ComputerUnit((int) (screenSize.getWidth()/4)*3, (int) screenSize.getHeight()/2));
-        theNetwork.add(new ComputerUnit((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)*3));
-        for(ComputerUnit tn : theNetwork){
+        Vector<Device> theNetwork = new Vector<Device>();
+        theNetwork.add(new Device((int) screenSize.getWidth()/4, (int) screenSize.getHeight()/2));
+        theNetwork.add(new Device((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)));
+        theNetwork.add(new Device((int) (screenSize.getWidth()/4)*3, (int) screenSize.getHeight()/2));
+        theNetwork.add(new Device((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)*3));
+        for(Device tn : theNetwork){
             tn.initWireLock();
         }
         theNetwork.get(0).addConnections(2, theNetwork.get(1).getLocks().get(6));

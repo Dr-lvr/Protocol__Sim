@@ -1,15 +1,14 @@
-package animation.sprites;
+import animation.sprites.Board;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-public class Collision extends JFrame {
+public class User_Interface extends JFrame {
 
-    public Collision() {
+    public User_Interface() {
 
         initUI();
     }
-
     private void initUI() {
 
         add(new Board());
