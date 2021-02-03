@@ -1,8 +1,10 @@
 package animation.sprites;
 
+import java.awt.*;
+
 public class Graphical_Package extends Sprite {
 
-    private final int BOARD_WIDTH = 1000;
+    private final int BOARD_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     private final int PACKAGE_SPEED = 2;
 
     public Graphical_Package(int x, int y) {
