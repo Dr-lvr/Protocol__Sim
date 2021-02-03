@@ -8,7 +8,8 @@ public class ComputerUnit extends Sprite {
     private int dx;
     private int dy;
    // private List<PackageUnit> packages;
-    private Vector<PackageUnit> packages;
+    private Vector<PackageUnit> packageOut;
+    private Deque<PackageUnit> packageIn;//double ended queue
 
     public ComputerUnit(int x, int y) {
         super(x, y);
@@ -16,7 +17,8 @@ public class ComputerUnit extends Sprite {
     }
     private void initCraft() {
         //packages = new ArrayList<>();
-        packages = new Vector<>();
+        packageOut = new Vector<>();
+        packageIn = new ArrayDeque<>();
         loadImage("src/a_images/computer-icon.png");
         getImageDimensions();
     }
@@ -33,7 +35,7 @@ public class ComputerUnit extends Sprite {
     public void fire(int direction) {
 
         //packages.add(new PackageUnit(x + width, y + height / 2));
-        packages.add(new PackageUnit(x + width, y + height / 2, direction));
+        packageOut.add(new PackageUnit(x + width, y + height / 2, direction));
     }
     /*
     public void fire() {
@@ -41,12 +43,19 @@ public class ComputerUnit extends Sprite {
         packages.add(new PackageUnit(x + width, y + height / 2));
     }
     */
-    public List<PackageUnit> getPackages() {
-        return packages;
+    public List<PackageUnit> getPackageOut() {
+        return packageOut;
+    }
+    public void setPackageIn(PackageUnit packageUnit) {
+        //set first position
+        packageIn.addFirst(packageUnit);
+    }
+    public PackageUnit getPackageIn() throws NoSuchElementException{
+        //get last position
+        return packageIn.removeLast();
     }
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-
         //fire packets
         Random gen = new Random();
         if (key == KeyEvent.VK_SPACE) {

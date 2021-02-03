@@ -13,11 +13,11 @@ import java.util.Vector;
     public class Controller {
 
         private Controller theController;
-        private Vector<ComputerUnit> myNetwork;//data structure for mapping the network, represent the logic network
+        private Vector<ComputerLogic> myNetwork;//data structure for mapping the network, represent the logic network
 
         public Controller() {
             //at least initialize data structures
-            myNetwork = new Vector<ComputerUnit>();
+            myNetwork = new Vector<ComputerLogic>();
         }
         public Controller getControllerInstance() {
             if (theController == null) {
@@ -25,25 +25,25 @@ import java.util.Vector;
             }
             return theController;
         }
-        public void add(ComputerUnit aComputer){
+        public void add(ComputerLogic aComputer){
             myNetwork.add(aComputer);
         }
         public int getNetworkSize(){
             return myNetwork.size();
         }
         public boolean testNetwork(){
-            for (ComputerUnit cp : myNetwork){
-                if(cp.isRequest()){
+            for (ComputerLogic cp : myNetwork){
+               // if(cp.isRequest()){
                     //manage requests
-                };
+                //};
             }
             return false;
         }
         public boolean testIsWriting(){
-            for (ComputerUnit cp : myNetwork){
-                if(cp.isWriting()){
+            for (ComputerLogic cp : myNetwork){
+               // if(cp.isWriting()){
                     //manage busy
-                };
+                //};
             }
             return false;
         }

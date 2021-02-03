@@ -87,7 +87,7 @@ public class Board extends JPanel implements ActionListener {
                 g.drawImage(g_cp.getImage(), g_cp.getX(), g_cp.getY(),
                         this);
             }
-            List<PackageUnit> ms = g_cp.getPackages();
+            List<PackageUnit> ms = g_cp.getPackageOut();
             for (PackageUnit aPackage : ms) {
                 if (aPackage.isVisible()) {
                     g.drawImage(aPackage.getImage(), aPackage.getX(),
@@ -135,7 +135,7 @@ public class Board extends JPanel implements ActionListener {
     }
     private void updatePackage() {
         for(ComputerUnit g_cp : graphical_computer) {
-            List<PackageUnit> ms = g_cp.getPackages();
+            List<PackageUnit> ms = g_cp.getPackageOut();
             for (int i = 0; i < ms.size(); i++) {
                 PackageUnit m = ms.get(i);
                 if (m.isVisible()) {
@@ -176,8 +176,10 @@ public class Board extends JPanel implements ActionListener {
                 isRunning = false;
             }
         }*/
+
+        //Sender -> Package -> Receiver
         for(ComputerUnit g_cp : graphical_computer) {
-            List<PackageUnit> ms = g_cp.getPackages();
+            List<PackageUnit> ms = g_cp.getPackageOut();
             for (PackageUnit m : ms) {
                 Rectangle r1 = m.getBounds();
                 for (ComputerUnit computerUnit : graphical_computer) {
@@ -187,8 +189,8 @@ public class Board extends JPanel implements ActionListener {
                         //computerUnit.setVisible(false);
 
                         //shunting-sorting-switching packets
-                        Random gen = new Random();
-                        computerUnit.fire(gen.nextInt(3));
+                        //Random gen = new Random();
+                        computerUnit.fire(m.getDirection());
                     }
                 }
             }

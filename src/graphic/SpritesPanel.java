@@ -1,6 +1,6 @@
     package graphic;
 
-    import logic.ComputerUnit;
+    import logic.ComputerLogic;
     import logic.Controller;
 
     import java.awt.Graphics;
@@ -10,23 +10,22 @@
     import java.util.Vector;
 
     import javax.swing.JComponent;
-    import javax.swing.JFrame;
 
     public class SpritesPanel extends JComponent {
 
         private static int serial;
-        private Vector<ComputerUnit> network;
+        private Vector<ComputerLogic> network;
         private Controller ctrl_MainInstance;
 
         public SpritesPanel(){
             ++serial;
             ctrl_MainInstance = new Controller();
-            network = new Vector<ComputerUnit>();
+            network = new Vector<ComputerLogic>();
         }
 
         public void buildNetwork(int computerNumber){
             for(int i=0; i<computerNumber; ++i) {
-                network.add(new ComputerUnit(ctrl_MainInstance));
+                network.add(new ComputerLogic(ctrl_MainInstance));
             }
         }
 
