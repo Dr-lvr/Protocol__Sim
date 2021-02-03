@@ -121,16 +121,17 @@ public class Board extends JPanel implements ActionListener {
     }
     @Override
     public synchronized void actionPerformed(ActionEvent e) {
-        try {
+
             running();
             updateNetwork();
             updatePackage();
             updateComputerUnits();
+        try {
             checkCollisions();
-            repaint();
         } catch(ConcurrentModificationException cm){
-            System.out.println(cm);
+            cm.printStackTrace();
         }
+            repaint();
     }
     private synchronized void running() {
         if (!isRunning) {
@@ -210,12 +211,12 @@ public class Board extends JPanel implements ActionListener {
     private class TAdapter extends KeyAdapter {
 
         @Override
-        public synchronized void keyReleased(KeyEvent e) {
+        public void keyReleased(KeyEvent e) {
             graphical_computer.get(0).keyReleased(e);
         }
 
         @Override
-        public synchronized void keyPressed(KeyEvent e) {
+        public void keyPressed(KeyEvent e) {
             graphical_computer.get(0).keyPressed(e);
         }
     }

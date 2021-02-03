@@ -46,10 +46,8 @@
             public synchronized void fire(int direction) {
                 //packages.add(new PackageUnit(x + width, y + height / 2));
                 switch(direction){
-                    case 0:
-                    packageOut.add(new PackageUnit(x + width, y + height / 2, direction));
-                    break;
                     default:
+                        packageOut.add(new PackageUnit(x + width, y + height / 2, direction));
                         break;
                 }
             }
