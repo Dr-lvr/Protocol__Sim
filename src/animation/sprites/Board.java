@@ -1,6 +1,8 @@
 package animation.sprites;
 
 
+import a_provider.ConfigProvider;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -12,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     //private Graphical_Computer graphical_computer;
     //private List<Graphical_Computer> theNetwork;
-    private Vector<Graphical_Computer> graphical_computer;
+    private Vector<ComputerUnit> graphical_computer;
     private boolean isRunning;
     private final int ICRAFT_X = 40;
     private final int ICRAFT_Y = 60;
@@ -45,27 +46,20 @@ public class Board extends JPanel implements ActionListener {
     };
 */
     public Board() {
-
         initBoard();
     }
-
     private void initBoard() {
-
         addKeyListener(new TAdapter());
         setFocusable(true);
         setBackground(Color.WHITE);
         isRunning = true;
-
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
-
         //graphical_computer = new Graphical_Computer(ICRAFT_X, ICRAFT_Y);
         graphical_computer = ConfigProvider.getControllerInstance().getTokenRing();
        // initNetwork();
-
         timer = new Timer(DELAY, this);
         timer.start();
     }
-
    // public void initNetwork() {
 
         //theNetwork = new ArrayList<>();
@@ -75,105 +69,74 @@ public class Board extends JPanel implements ActionListener {
             theNetwork.add(new Graphical_Computer(p[0], p[1]));
         }*/
     //}
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         if (isRunning) {
-
             drawObjects(g);
-
         } else {
-
             drawGameOver(g);
         }
-
         Toolkit.getDefaultToolkit().sync();
     }
-
     private void drawObjects(Graphics g) {
-
         // draw network
-        for(Graphical_Computer g_cp : graphical_computer) {
-
+        for(ComputerUnit g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
                 g.drawImage(g_cp.getImage(), g_cp.getX(), g_cp.getY(),
                         this);
             }
-
-            List<Graphical_Package> ms = g_cp.getPackages();
-
-            for (Graphical_Package aPackage : ms) {
+            List<PackageUnit> ms = g_cp.getPackages();
+            for (PackageUnit aPackage : ms) {
                 if (aPackage.isVisible()) {
                     g.drawImage(aPackage.getImage(), aPackage.getX(),
                             aPackage.getY(), this);
                 }
             }
         }
-
-        for (Graphical_Computer graphical_computer : graphical_computer) {
+        for (ComputerUnit graphical_computer : graphical_computer) {
             if (graphical_computer.isVisible()) {
                 g.drawImage(graphical_computer.getImage(), graphical_computer.getX(), graphical_computer.getY(), this);
             }
         }
-
         g.setColor(Color.WHITE);
         g.drawString("Computers left: " + graphical_computer.size(), 5, 15);
     }
-
     private void drawGameOver(Graphics g) {
-
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fm = getFontMetrics(small);
-
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - fm.stringWidth(msg)) / 2,
                 B_HEIGHT / 2);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
         running();
-
         updateNetwork();
         updatePackage();
         updateComputerUnits();
-
         checkCollisions();
-
         repaint();
     }
-
     private void running() {
-
         if (!isRunning) {
             timer.stop();
         }
     }
-
     private void updateNetwork() {
-
-        for(Graphical_Computer g_cp : graphical_computer) {
+        for(ComputerUnit g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
-
                 g_cp.move();
             }
         }
     }
-
     private void updatePackage() {
-
-        for(Graphical_Computer g_cp : graphical_computer) {
-            List<Graphical_Package> ms = g_cp.getPackages();
-
+        for(ComputerUnit g_cp : graphical_computer) {
+            List<PackageUnit> ms = g_cp.getPackages();
             for (int i = 0; i < ms.size(); i++) {
-
-                Graphical_Package m = ms.get(i);
-
+                PackageUnit m = ms.get(i);
                 if (m.isVisible()) {
                     m.move();
                 } else {
@@ -182,19 +145,13 @@ public class Board extends JPanel implements ActionListener {
             }
         }
     }
-
     private void updateComputerUnits() {
-
         if (graphical_computer.isEmpty()) {
-
             isRunning = false;
             return;
         }
-
         for (int i = 0; i < graphical_computer.size(); i++) {
-
-            Graphical_Computer a = graphical_computer.get(i);
-
+            ComputerUnit a = graphical_computer.get(i);
             if (a.isVisible()) {
                 a.move();
             } else {
@@ -218,29 +175,21 @@ public class Board extends JPanel implements ActionListener {
                 isRunning = false;
             }
         }*/
-
-        for(Graphical_Computer g_cp : graphical_computer) {
-            List<Graphical_Package> ms = g_cp.getPackages();
-
-            for (Graphical_Package m : ms) {
-
+        for(ComputerUnit g_cp : graphical_computer) {
+            List<PackageUnit> ms = g_cp.getPackages();
+            for (PackageUnit m : ms) {
                 Rectangle r1 = m.getBounds();
-
-                for (Graphical_Computer computerUnit : graphical_computer) {
-
+                for (ComputerUnit computerUnit : graphical_computer) {
                     Rectangle r2 = computerUnit.getBounds();
-
                     if (r1.intersects(r2)) {
-
                         m.setVisible(false);
                         //computerUnit.setVisible(false);
-                        computerUnit.fire();
+                        computerUnit.fire(0);
                     }
                 }
             }
         }
     }
-
     private class TAdapter extends KeyAdapter {
 
         @Override
