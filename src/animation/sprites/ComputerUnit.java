@@ -43,11 +43,37 @@
                     y = 1;
                 }
             }
+            //package spawner
             public synchronized void fire(int direction) {
                 //packages.add(new PackageUnit(x + width, y + height / 2));
                 switch(direction){
+                    //30x18
+                    case 0:
+                        packageOut.add(new PackageUnit(x - 30, y - 20, direction));
+                    break;
+                    case 1:
+                        packageOut.add(new PackageUnit(x + width/2 - 15, y - 20, direction));
+                        break;
+                    case 2:
+                        packageOut.add(new PackageUnit(x + width, y - 20, direction));
+                        break;
+                    case 3:
+                        packageOut.add(new PackageUnit(x + width, y + height/2, direction));
+                        break;
+                    case 4:
+                        packageOut.add(new PackageUnit(x + width, y + height, direction));
+                        break;
+                    case 5:
+                        packageOut.add(new PackageUnit(x + width/2 - 15, y + height, direction));
+                        break;
+                    case 6:
+                        packageOut.add(new PackageUnit(x -30, y + height, direction));
+                        break;
+                    case 7:
+                        packageOut.add(new PackageUnit(x - 30, y + height/2, direction));
+                        break;
                     default:
-                        packageOut.add(new PackageUnit(x + width, y + height / 2, direction));
+                        //packageOut.add(new PackageUnit(x + width, y + height / 2, direction));
                         break;
                 }
             }
@@ -73,7 +99,7 @@
                 //fire packets
                 Random gen = new Random();
                 if (key == KeyEvent.VK_SPACE) {
-                    fire(gen.nextInt(5));
+                    fire(gen.nextInt(8));
                 }
                 if (key == KeyEvent.VK_LEFT) {
                     dx = -1;
