@@ -100,7 +100,9 @@ public class Board extends JPanel implements ActionListener {
             }
         }
         g.setColor(Color.black);
-        g.drawString("Computers left: " + graphical_computer.size(), 5, 15);
+        g.drawString("Computers net: " + graphical_computer.size(), 5, 15);
+        g.drawString("Press tab to send Packages", 5, 30);
+        g.drawString("Press key to mov your pc", 5, 45);
     }
     private void drawGameOver(Graphics g) {
         String msg = "Game Over";

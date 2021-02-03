@@ -17,6 +17,8 @@ import java.util.List;
         private Deque<PackageUnit> packageIn;//double ended queue
         private Vector<WireLock> wireLocks;
 
+        private Vector<ComputerUnit> connections;//
+
         public ComputerUnit(int x, int y) {
             super(x, y);
             initCraft();
@@ -25,7 +27,8 @@ import java.util.List;
             //packages = new ArrayList<>();
             packageOut = new Vector<>();
             packageIn = new ArrayDeque<>();
-            wireLocks = new Vector<>(8);
+            wireLocks = new Vector<>();
+            connections = new Vector<>();
             loadImage("src/a_images/computer-icon.png");
             getImageDimensions();
         }
@@ -95,6 +98,12 @@ import java.util.List;
             if (key == KeyEvent.VK_DOWN) {
                 dy = 0;
             }
+        }
+        public Vector<ComputerUnit> getConnections() {
+            return connections;
+        }
+        public void addConnections(ComputerUnit connection) {
+            this.connections.add(connection);
         }
         public Vector<WireLock> getLocks(){
             return wireLocks;

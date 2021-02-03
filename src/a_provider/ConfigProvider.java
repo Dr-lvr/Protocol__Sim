@@ -34,7 +34,9 @@ public class ConfigProvider {
                 switch(i) {
                     case 0:
                         theNetwork.get(i).getLocks().get(2).setLocked(true);
+                        theNetwork.get(i).addConnections(theNetwork.get(1));
                         theNetwork.get(i).getLocks().get(4).setLocked(true);
+                        theNetwork.get(i).addConnections(theNetwork.get(3));
                         break;
                     case 1:
                         theNetwork.get(i).getLocks().get(6).setLocked(true);
