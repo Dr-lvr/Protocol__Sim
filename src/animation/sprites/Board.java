@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -50,7 +51,7 @@ public class Board extends JPanel implements ActionListener {
     public Board() {
         initBoard();
     }
-    private void initBoard() {
+    private synchronized void initBoard() {
         addKeyListener(new TAdapter());
         setFocusable(true);
         setBackground(Color.WHITE);
@@ -72,7 +73,7 @@ public class Board extends JPanel implements ActionListener {
         }*/
     //}
     @Override
-    public void paintComponent(Graphics g) {
+    public synchronized void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (isRunning) {
             drawObjects(g);
@@ -81,7 +82,7 @@ public class Board extends JPanel implements ActionListener {
         }
         Toolkit.getDefaultToolkit().sync();
     }
-    private void drawObjects(Graphics g) {
+    private synchronized void drawObjects(Graphics g) {
         // draw network
         for(ComputerUnit g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
@@ -109,7 +110,7 @@ public class Board extends JPanel implements ActionListener {
         g.drawString("Press tab to send Packages", 5, 30);
         g.drawString("Press key to mov your pc", 5, 45);
     }
-    private void drawGameOver(Graphics g) {
+    private synchronized void drawGameOver(Graphics g) {
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fm = getFontMetrics(small);
@@ -119,27 +120,31 @@ public class Board extends JPanel implements ActionListener {
                 B_HEIGHT / 2);
     }
     @Override
-    public void actionPerformed(ActionEvent e) {
-        running();
-        updateNetwork();
-        updatePackage();
-        updateComputerUnits();
-        checkCollisions();
-        repaint();
+    public synchronized void actionPerformed(ActionEvent e) {
+        try {
+            running();
+            updateNetwork();
+            updatePackage();
+            updateComputerUnits();
+            checkCollisions();
+            repaint();
+        } catch(ConcurrentModificationException cm){
+            System.out.println(cm);
+        }
     }
-    private void running() {
+    private synchronized void running() {
         if (!isRunning) {
             timer.stop();
         }
     }
-    private void updateNetwork() {
+    private synchronized void updateNetwork() {
         for(ComputerUnit g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
                 g_cp.move();
             }
         }
     }
-    private void updatePackage() {
+    private synchronized void updatePackage() {
         for(ComputerUnit g_cp : graphical_computer) {
             List<PackageUnit> ms = g_cp.getPackageOut();
             for (int i = 0; i < ms.size(); i++) {
@@ -152,7 +157,7 @@ public class Board extends JPanel implements ActionListener {
             }
         }
     }
-    private void updateComputerUnits() {
+    private synchronized void updateComputerUnits() {
         if (graphical_computer.isEmpty()) {
             isRunning = false;
             return;
@@ -167,7 +172,7 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    public void checkCollisions() {
+    public synchronized void checkCollisions() {
         /* collision between machines
         Rectangle r3 = graphical_computer.getBounds();
 
@@ -186,7 +191,7 @@ public class Board extends JPanel implements ActionListener {
         //Sender -> Package -> Receiver
         for(ComputerUnit g_cp : graphical_computer) {
             List<PackageUnit> ms = g_cp.getPackageOut();
-            for (PackageUnit m : ms) {
+            for (PackageUnit m : ms) {//<---------------
                 Rectangle r1 = m.getBounds();
                 for (ComputerUnit computerUnit : graphical_computer) {
                     Rectangle r2 = computerUnit.getBounds();
@@ -205,12 +210,12 @@ public class Board extends JPanel implements ActionListener {
     private class TAdapter extends KeyAdapter {
 
         @Override
-        public void keyReleased(KeyEvent e) {
+        public synchronized void keyReleased(KeyEvent e) {
             graphical_computer.get(0).keyReleased(e);
         }
 
         @Override
-        public void keyPressed(KeyEvent e) {
+        public synchronized void keyPressed(KeyEvent e) {
             graphical_computer.get(0).keyPressed(e);
         }
     }

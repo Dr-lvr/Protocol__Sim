@@ -28,18 +28,46 @@ public class PackageUnit extends Sprite {
         getImageDimensions();
     }
     public void move() {
-
-        Random gen = new Random();
         switch(getDirection()){
             case 0:
-                moveRightUp();
+                moveLeftUp();
                 break;
             case 1:
+                moveUp();
+                break;
+            case 2:
+                moveRightUp();
+                break;
+            case 3:
                 moveRight();
                 break;
-            default:
+            case 4:
                 moveRightDown();
                 break;
+            case 5:
+                moveDown();
+                break;
+            case 6:
+                moveLeftDown();
+                break;
+            case 7:
+                moveLeft();
+                break;
+            default:
+                break;
+        }
+    }
+    public void moveLeftUp() {
+        x -= PACKAGE_SPEED;
+        y -= PACKAGE_SPEED;
+        if (x > BOARD_WIDTH){
+            visible = false;
+        }
+    }
+    public void moveUp() {
+        y -= PACKAGE_SPEED;
+        if (x > BOARD_WIDTH){
+            visible = false;
         }
     }
     public void moveRightUp() {
@@ -58,6 +86,25 @@ public class PackageUnit extends Sprite {
     public void moveRightDown() {
         x += PACKAGE_SPEED;
         y += PACKAGE_SPEED;
+        if (x > BOARD_WIDTH){
+            visible = false;
+        }
+    }
+    public void moveDown() {
+        y += PACKAGE_SPEED;
+        if (x > BOARD_WIDTH){
+            visible = false;
+        }
+    }
+    public void moveLeftDown() {
+        x -= PACKAGE_SPEED;
+        y += PACKAGE_SPEED;
+        if (x > BOARD_WIDTH){
+            visible = false;
+        }
+    }
+    public void moveLeft() {
+        x -= PACKAGE_SPEED;
         if (x > BOARD_WIDTH){
             visible = false;
         }
