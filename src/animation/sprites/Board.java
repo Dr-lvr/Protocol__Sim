@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -184,7 +185,8 @@ public class Board extends JPanel implements ActionListener {
                     if (r1.intersects(r2)) {
                         m.setVisible(false);
                         //computerUnit.setVisible(false);
-                        computerUnit.fire(0);
+                        Random gen = new Random();
+                        computerUnit.fire(gen.nextInt(3));
                     }
                 }
             }
