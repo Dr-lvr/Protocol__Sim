@@ -106,7 +106,7 @@ public class Board extends JPanel implements ActionListener {
             }
         }
         g.setColor(Color.black);
-        g.drawString("Computers net: " + graphical_computer.size(), 5, 15);
+        g.drawString("Computers net: " + graphical_computer.get(0).getSentPackage(), 5, 15);
         g.drawString("Press tab to send Packages", 5, 30);
         g.drawString("Press key to mov your pc", 5, 45);
     }

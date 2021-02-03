@@ -19,6 +19,8 @@
             //private Vector<ComputerUnit> connectionMap;//
             private Map<WireLock, WireLock> connectionMap;
 
+            private int sentPackage;
+
             public Device(int x, int y) {
                 super(x, y);
                 initCraft();
@@ -98,6 +100,7 @@
                 //fire packets
                 Random gen = new Random();
                 if (key == KeyEvent.VK_SPACE) {
+                    ++sentPackage;
                     fire(gen.nextInt(8));
                 }
                 if (key == KeyEvent.VK_LEFT) {
@@ -127,6 +130,9 @@
                 if (key == KeyEvent.VK_DOWN) {
                     dy = 0;
                 }
+            }
+            public int getSentPackage() {
+                return sentPackage;
             }
             public Map<WireLock, WireLock> getConnectionMap() {
                 return connectionMap;
