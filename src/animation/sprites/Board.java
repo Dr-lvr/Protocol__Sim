@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
-import java.util.Random;
 import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -56,7 +55,7 @@ public class Board extends JPanel implements ActionListener {
         isRunning = true;
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         //graphical_computer = new Graphical_Computer(ICRAFT_X, ICRAFT_Y);
-        graphical_computer = ConfigProvider.getControllerInstance().getTokenRing();
+        graphical_computer = ConfigProvider.getProviderInstance().getTokenRing();
        // initNetwork();
         timer = new Timer(DELAY, this);
         timer.start();
