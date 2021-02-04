@@ -41,9 +41,13 @@ public class Device extends Sprite {
             y = 1;
         }
     }
+
     //package spawner
     public void fire(WireLock destination) {
-        //packages.add(new PackageUnit(x + width, y + height / 2));
+
+        //RandomGen get the source spawnLock(get it in the map)
+        //set the destination by the wired lock
+
         switch(new Package(0, 0, destination).getBehaviour()){
             case 0:
                 packageOut.add(new Package(x - 30, y - 20, destination));
