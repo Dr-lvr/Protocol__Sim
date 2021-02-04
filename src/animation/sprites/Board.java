@@ -3,6 +3,8 @@ package animation.sprites;
 
 import a_provider.ConfigProvider;
 import a_provider.WireLock;
+import animation.controlPanel.FadingJPanel;
+import graphic.ControlPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -28,9 +30,9 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     private Vector<Device> graphical_computer;
     private boolean isRunning;
-    private final int ICRAFT_X = 40;
-    private final int ICRAFT_Y = 60;
-    private final int B_WIDTH = (int) screenSize.getWidth();
+    //private final int ICRAFT_X = 40;
+    //private final int ICRAFT_Y = 60;
+    private final int B_WIDTH = (int) screenSize.getWidth()- 200;
     private final int B_HEIGHT = (int) screenSize.getHeight();
     private final int DELAY = 15;
 

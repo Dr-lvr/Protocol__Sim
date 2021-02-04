@@ -23,10 +23,10 @@ public class ConfigProvider {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Vector<Device> theNetwork = new Vector<Device>();
-        theNetwork.add(new Device((int) screenSize.getWidth()/4, (int) screenSize.getHeight()/2));
-        theNetwork.add(new Device((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)));
-        theNetwork.add(new Device((int) (screenSize.getWidth()/4)*3, (int) screenSize.getHeight()/2));
-        theNetwork.add(new Device((int) screenSize.getWidth()/2, (int) (screenSize.getHeight()/4)*3));
+        theNetwork.add(new Device((int) screenSize.getWidth()/4 - 300, (int) screenSize.getHeight()/2 - 150));
+        theNetwork.add(new Device((int) screenSize.getWidth()/2 - 300, (int) (screenSize.getHeight()/4) - 150));
+        theNetwork.add(new Device((int) (screenSize.getWidth()/4)*3 - 300, (int) screenSize.getHeight()/2 - 150));
+        theNetwork.add(new Device((int) screenSize.getWidth()/2 - 300, (int) (screenSize.getHeight()/4)*3 - 150));
         for(Device tn : theNetwork){
             tn.initWireLock();
         }
