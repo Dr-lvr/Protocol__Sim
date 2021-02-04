@@ -1,4 +1,4 @@
-package graphic;
+package animation.controlPanel;
 
 import animation.controlPanel.FadingJPanel;
 

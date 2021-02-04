@@ -3,8 +3,6 @@ package animation.sprites;
 
 import a_provider.ConfigProvider;
 import a_provider.WireLock;
-import animation.controlPanel.FadingJPanel;
-import graphic.ControlPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
