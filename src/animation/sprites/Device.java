@@ -66,53 +66,17 @@ public class Device extends Sprite {
 
         return wireLocks;
     }
-    public WireLock getRandomLock(){
-        Random gen = new Random();
+    public WireLock getRandomLock() throws NoSuchElementException{
         for (Map.Entry<WireLock, WireLock> entry : connectionMap.entrySet()){
             if(entry.getKey().isLocked()){
                 return entry.getValue();
             }
         }
-        return new WireLock(0, 0);
+        throw new NoSuchElementException();
     }
     public Map<WireLock, WireLock> getConnectionMap() {
 
         return connectionMap;
-    }
-    //package spawner
-    public void fire(WireLock destination) {
-
-        //RandomGen get the source spawnLock(get it in the map)
-        //set the destination by the wired lock
-
-        switch(new Package(0, 0, destination).getBehaviour()){
-            case 0:
-                packageOut.add(new Package(x - 30, y - 20, destination));
-                break;
-            case 1:
-                packageOut.add(new Package(x + width/2 - 15, y - 20, destination));
-                break;
-            case 2:
-                packageOut.add(new Package(x + width, y - 20, destination));
-                break;
-            case 3:
-                packageOut.add(new Package(x + width, y + height/2, destination));
-                break;
-            case 4:
-                packageOut.add(new Package(x + width, y + height, destination));
-                break;
-            case 5:
-                packageOut.add(new Package(x + width/2 - 15, y + height, destination));
-                break;
-            case 6:
-                packageOut.add(new Package(x -30, y + height, destination));
-                break;
-            case 7:
-                packageOut.add(new Package(x - 30, y + height/2, destination));
-                break;
-            default:
-                break;
-        }
     }
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
@@ -147,6 +111,41 @@ public class Device extends Sprite {
         }
         if (key == KeyEvent.VK_DOWN) {
             dy = 0;
+        }
+    }
+    //package spawner
+    public void fire(WireLock destination) {
+
+        //RandomGen get the source spawnLock(get it in the map)
+        //set the destination by the wired lock
+
+        switch(new Package(0, 0, destination).getBehaviour()){
+        case 0:
+            packageOut.add(new Package(x - 30, y - 20, destination));
+            break;
+        case 1:
+            packageOut.add(new Package(x + width/2 - 15, y - 20, destination));
+            break;
+        case 2:
+            packageOut.add(new Package(x + width, y - 20, destination));
+            break;
+        case 3:
+            packageOut.add(new Package(x + width, y + height/2, destination));
+            break;
+        case 4:
+            packageOut.add(new Package(x + width, y + height, destination));
+            break;
+        case 5:
+            packageOut.add(new Package(x + width/2 - 15, y + height, destination));
+            break;
+        case 6:
+            packageOut.add(new Package(x -30, y + height, destination));
+            break;
+        case 7:
+            packageOut.add(new Package(x - 30, y + height/2, destination));
+            break;
+        default:
+            break;
         }
     }
     public void initWireLock(){

@@ -35,6 +35,7 @@ public class Package extends Sprite {
     public WireLock getDestination(){
         return destination;
     }
+
     public int getBehaviour(){
         if(x < destination.getX() && y < destination.getY()){
             return 4;
