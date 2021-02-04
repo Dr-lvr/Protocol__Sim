@@ -26,8 +26,6 @@ public class Board extends JPanel implements ActionListener {
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private Timer timer;
-    //private Graphical_Computer graphical_computer;
-    //private List<Graphical_Computer> theNetwork;
     private Vector<Device> graphical_computer;
     private boolean isRunning;
     private final int ICRAFT_X = 40;
@@ -35,23 +33,11 @@ public class Board extends JPanel implements ActionListener {
     private final int B_WIDTH = (int) screenSize.getWidth();
     private final int B_HEIGHT = (int) screenSize.getHeight();
     private final int DELAY = 15;
-/*
-    private final int[][] pos = {
-            {2380, 29}, {2500, 59}, {1380, 89},
-            {780, 109}, {580, 139}, {680, 239},
-            {790, 259}, {760, 50}, {790, 150},
-            {980, 209}, {560, 45}, {510, 70},
-            {930, 159}, {590, 80}, {530, 60},
-            {940, 59}, {990, 30}, {920, 200},
-            {900, 259}, {660, 50}, {540, 90},
-            {810, 220}, {860, 20}, {740, 180},
-            {820, 128}, {490, 170}, {700, 30}
-    };
-*/
+
     public Board() {
         initBoard();
     }
-    private synchronized void initBoard() {
+    private void initBoard() {
         addKeyListener(new TAdapter());
         setFocusable(true);
         setBackground(Color.WHITE);
@@ -63,17 +49,8 @@ public class Board extends JPanel implements ActionListener {
         timer = new Timer(DELAY, this);
         timer.start();
     }
-   // public void initNetwork() {
-
-        //theNetwork = new ArrayList<>();
-        //theNetwork = ConfigProvider.getControllerInstance().getTokenRing();
-        /*
-        for (int[] p : pos) {
-            theNetwork.add(new Graphical_Computer(p[0], p[1]));
-        }*/
-    //}
     @Override
-    public synchronized void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (isRunning) {
             drawObjects(g);
@@ -82,7 +59,7 @@ public class Board extends JPanel implements ActionListener {
         }
         Toolkit.getDefaultToolkit().sync();
     }
-    private synchronized void drawObjects(Graphics g) {
+    private void drawObjects(Graphics g) {
         // draw network
         for(Device g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
@@ -110,7 +87,7 @@ public class Board extends JPanel implements ActionListener {
         g.drawString("Press tab to send Packages", 5, 30);
         g.drawString("Press key to mov your pc", 5, 45);
     }
-    private synchronized void drawGameOver(Graphics g) {
+    private void drawGameOver(Graphics g) {
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fm = getFontMetrics(small);
@@ -120,7 +97,7 @@ public class Board extends JPanel implements ActionListener {
                 B_HEIGHT / 2);
     }
     @Override
-    public synchronized void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {
 
             running();
             updateNetwork();
@@ -133,19 +110,19 @@ public class Board extends JPanel implements ActionListener {
         }
             repaint();
     }
-    private synchronized void running() {
+    private void running() {
         if (!isRunning) {
             timer.stop();
         }
     }
-    private synchronized void updateNetwork() {
+    private void updateNetwork() {
         for(Device g_cp : graphical_computer) {
             if (g_cp.isVisible()) {
                 g_cp.move();
             }
         }
     }
-    private synchronized void updatePackage() {
+    private void updatePackage() {
         for(Device g_cp : graphical_computer) {
             List<Package> ms = g_cp.getPackageOut();
             for (int i = 0; i < ms.size(); i++) {
@@ -158,7 +135,7 @@ public class Board extends JPanel implements ActionListener {
             }
         }
     }
-    private synchronized void updateComputerUnits() {
+    private void updateComputerUnits() {
         if (graphical_computer.isEmpty()) {
             isRunning = false;
             return;
@@ -173,7 +150,7 @@ public class Board extends JPanel implements ActionListener {
         }
     }
 
-    public synchronized void checkCollisions() {
+    public void checkCollisions() {
         /* collision between machines
         Rectangle r3 = graphical_computer.getBounds();
 
@@ -188,7 +165,6 @@ public class Board extends JPanel implements ActionListener {
                 isRunning = false;
             }
         }*/
-
         //Sender -> Package -> Receiver
         for(Device g_cp : graphical_computer) {
             List<Package> ms = g_cp.getPackageOut();
@@ -199,7 +175,6 @@ public class Board extends JPanel implements ActionListener {
                     if (r1.intersects(r2)) {
                         m.setVisible(false);
                         //computerUnit.setVisible(false);
-
                         //manage packets then send it
                         //
                         //
