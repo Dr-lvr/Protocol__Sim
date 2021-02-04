@@ -1,5 +1,5 @@
 # Protocol__Sim
-Connectivity Protocols simulator 
+Connectivity Multi Protocol simulator 
 
 ## Class index:
 * Board
