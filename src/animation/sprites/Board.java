@@ -28,8 +28,6 @@ public class Board extends JPanel implements ActionListener {
     private Timer timer;
     private Vector<Device> graphical_computer;
     private boolean isRunning;
-    //private final int ICRAFT_X = 40;
-    //private final int ICRAFT_Y = 60;
     private final int B_WIDTH = (int) screenSize.getWidth()- 200;
     private final int B_HEIGHT = (int) screenSize.getHeight();
     private final int DELAY = 15;
@@ -43,9 +41,7 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.WHITE);
         isRunning = true;
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
-        //graphical_computer = new Graphical_Computer(ICRAFT_X, ICRAFT_Y);
         graphical_computer = ConfigProvider.getProviderInstance().getTokenRing();
-       // initNetwork();
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -91,7 +87,7 @@ public class Board extends JPanel implements ActionListener {
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fm = getFontMetrics(small);
-        g.setColor(Color.white);
+        g.setColor(Color.BLACK);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - fm.stringWidth(msg)) / 2,
                 B_HEIGHT / 2);

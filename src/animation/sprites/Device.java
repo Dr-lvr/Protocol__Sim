@@ -1,6 +1,5 @@
 package animation.sprites;
 
-import a_provider.Direction;
 import a_provider.WireLock;
 
 import java.awt.*;
@@ -11,12 +10,10 @@ import java.util.List;
 public class Device extends Sprite {
     private int dx;
     private int dy;
-    // private List<PackageUnit> packages;
+
     private Vector<Package> packageOut;
     private Deque<Package> packageIn;//double ended queue
     private Vector<WireLock> wireLocks;
-
-    //private Vector<ComputerUnit> connectionMap;//
     private Map<WireLock, WireLock> connectionMap;
 
     private int sentPackage;
@@ -142,28 +139,28 @@ public class Device extends Sprite {
         for(int i=0; i<8; ++i){
             switch(i){
                 case 0:
-                    wireLocks.add(new WireLock(collider.x, collider.y, Direction.UP_LEFT));
+                    wireLocks.add(new WireLock(collider.x, collider.y));
                     break;
                 case 1:
-                    wireLocks.add(new WireLock(collider.x+collider.width/2, collider.y, Direction.UP));
+                    wireLocks.add(new WireLock(collider.x+collider.width/2, collider.y));
                     break;
                 case 2:
-                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y, Direction.UP_RIGHT));
+                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y));
                     break;
                 case 3:
-                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y+collider.height/2, Direction.RIGHT));
+                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y+collider.height/2));
                     break;
                 case 4:
-                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y+collider.height, Direction.DOWN_RIGHT));
+                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y+collider.height));
                     break;
                 case 5:
-                    wireLocks.add(new WireLock(collider.x+collider.width/2, collider.y+collider.height, Direction.DOWN));
+                    wireLocks.add(new WireLock(collider.x+collider.width/2, collider.y+collider.height));
                     break;
                 case 6:
-                    wireLocks.add(new WireLock(collider.x, collider.y+collider.height, Direction.DOWN_LEFT));
+                    wireLocks.add(new WireLock(collider.x, collider.y+collider.height));
                     break;
                 case 7:
-                    wireLocks.add(new WireLock(collider.x, collider.y+collider.height/2, Direction.LEFT));
+                    wireLocks.add(new WireLock(collider.x, collider.y+collider.height/2));
                     break;
                 default:
                     break;

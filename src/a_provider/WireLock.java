@@ -2,14 +2,12 @@ package a_provider;
 
 public class WireLock {
 
-    private Direction relativePosition;
     private int x, y;
     private boolean locked;
 
-    public WireLock(int x, int y, Direction relativePosition) {
+    public WireLock(int x, int y) {
         this.x = x;
         this.y = y;
-        this.relativePosition = relativePosition;
     }
     public int getX() {
         return x;
@@ -28,8 +26,5 @@ public class WireLock {
     }
     public void setLocked(boolean locked) {
         this.locked = locked;
-    }
-    public void setRelativePosition(Direction relativePosition) {
-        this.relativePosition = relativePosition;
     }
 }

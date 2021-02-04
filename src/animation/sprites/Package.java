@@ -1,9 +1,6 @@
 package animation.sprites;
 
-import a_provider.Direction;
-
 import java.awt.*;
-import java.util.Random;
 
 public class Package extends Sprite {
 
