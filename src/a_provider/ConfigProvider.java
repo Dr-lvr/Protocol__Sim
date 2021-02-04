@@ -30,14 +30,14 @@ public class ConfigProvider {
         for(Device tn : theNetwork){
             tn.initWireLock();
         }
-        theNetwork.get(0).addConnections(2, theNetwork.get(1).getLocks().get(6));
-        theNetwork.get(1).addConnections(6, theNetwork.get(0).getLocks().get(2));
-        theNetwork.get(1).addConnections(4, theNetwork.get(2).getLocks().get(0));
-        theNetwork.get(2).addConnections(0, theNetwork.get(1).getLocks().get(4));
-        theNetwork.get(2).addConnections(6, theNetwork.get(3).getLocks().get(2));
-        theNetwork.get(3).addConnections(2, theNetwork.get(2).getLocks().get(6));
-        theNetwork.get(3).addConnections(0, theNetwork.get(0).getLocks().get(4));
-        theNetwork.get(0).addConnections(4, theNetwork.get(3).getLocks().get(0));
+        theNetwork.get(0).addConnection(2, theNetwork.get(1).getLocks().get(6));
+        theNetwork.get(1).addConnection(6, theNetwork.get(0).getLocks().get(2));
+        theNetwork.get(1).addConnection(4, theNetwork.get(2).getLocks().get(0));
+        theNetwork.get(2).addConnection(0, theNetwork.get(1).getLocks().get(4));
+        theNetwork.get(2).addConnection(6, theNetwork.get(3).getLocks().get(2));
+        theNetwork.get(3).addConnection(2, theNetwork.get(2).getLocks().get(6));
+        theNetwork.get(3).addConnection(0, theNetwork.get(0).getLocks().get(4));
+        theNetwork.get(0).addConnection(4, theNetwork.get(3).getLocks().get(0));
         return theNetwork;
     }
 }

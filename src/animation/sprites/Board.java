@@ -145,7 +145,6 @@ public class Board extends JPanel implements ActionListener {
             }
         }
     }
-
     public void checkCollisions() {
         /* collision between machines
         Rectangle r3 = graphical_computer.getBounds();
@@ -174,7 +173,7 @@ public class Board extends JPanel implements ActionListener {
                         //manage packets then send it
                         //
                         //
-                        computerUnit.fire(new WireLock(m.getDestination().getX()*-1, m.getDestination().getY()*-1));
+                        computerUnit.fire(new WireLock(m.getDestination().getX(), m.getDestination().getY()));
                     }
                 }
             }

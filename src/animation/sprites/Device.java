@@ -160,15 +160,19 @@ public class Device extends Sprite {
         }
     }
     public int getSentPackage() {
+
         return sentPackage;
     }
     public Map<WireLock, WireLock> getConnectionMap() {
+
         return connectionMap;
     }
-    public void addConnections(int nLock, WireLock lock) {
+    public void addConnection(int nLock, WireLock lock) {
+
         this.connectionMap.put(wireLocks.get(nLock), lock);
     }
     public Vector<WireLock> getLocks(){
+
         return wireLocks;
     }
     public void initWireLock(){
