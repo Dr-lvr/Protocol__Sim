@@ -55,4 +55,35 @@ Check Devices and update
 Check for collision between devices or between devices and
 packages
 
+###Sprite
+
+It is the base sprite
+
+* public Sprite(int, int)
+  
+construct the sprite by coordinates
+
+* protected getImageDimensions() : void
+
+get the sprite textures dimentions
+
+*protected loadImage(String ) : void
+
+set image by local adress
+
+* public getImage() : Image
+  
+* public getX() : int
+  
+*public getY() : int
+
+*public isVisible() : boolean
+
+*public setVisible(Boolean) : void
+
+*public getBounds() : Rectangle
+
+get a collider by sprite bounds
+
+
 
