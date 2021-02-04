@@ -42,6 +42,39 @@ public class Device extends Sprite {
         }
     }
     //package spawner
+    public void fire(WireLock destination) {
+        //packages.add(new PackageUnit(x + width, y + height / 2));
+        switch(new Package(0, 0, destination).getBehaviour()){
+            case 0:
+                packageOut.add(new Package(x - 30, y - 20, destination));
+                break;
+            case 1:
+                packageOut.add(new Package(x + width/2 - 15, y - 20, destination));
+                break;
+            case 2:
+                packageOut.add(new Package(x + width, y - 20, destination));
+                break;
+            case 3:
+                packageOut.add(new Package(x + width, y + height/2, destination));
+                break;
+            case 4:
+                packageOut.add(new Package(x + width, y + height, destination));
+                break;
+            case 5:
+                packageOut.add(new Package(x + width/2 - 15, y + height, destination));
+                break;
+            case 6:
+                packageOut.add(new Package(x -30, y + height, destination));
+                break;
+            case 7:
+                packageOut.add(new Package(x - 30, y + height/2, destination));
+                break;
+            default:
+                break;
+        }
+    }
+    /*
+    //package spawner
     public void fire(int direction) {
         //packages.add(new PackageUnit(x + width, y + height / 2));
         switch(direction){
@@ -73,6 +106,7 @@ public class Device extends Sprite {
                 break;
         }
     }
+    */
     public List<Package> getPackageOut() {
 
         return packageOut;
@@ -91,7 +125,7 @@ public class Device extends Sprite {
         Random gen = new Random();
         if (key == KeyEvent.VK_SPACE) {
             ++sentPackage;
-            fire(gen.nextInt(8));
+            fire(new WireLock(gen.nextInt(100), gen.nextInt(100)));
         }
         if (key == KeyEvent.VK_LEFT) {
             dx = -1;

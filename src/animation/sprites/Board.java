@@ -74,12 +74,12 @@ public class Board extends JPanel implements ActionListener {
             if (gp.isVisible()) {
                 g.drawImage(gp.getImage(), gp.getX(), gp.getY(), this);
                 for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
-                    g.drawLine(entry.getKey().getX(), entry.getKey().getY(), entry.getValue().getX(), entry.getValue().getY());
+                    //g.drawLine(entry.getKey().getX(), entry.getKey().getY(), entry.getValue().getX(), entry.getValue().getY());
                 }
             }
         }
         g.setColor(Color.black);
-        g.drawString("Computers net: " + graphical_computer.get(0).getSentPackage(), 5, 15);
+        g.drawString("Packages sent:  " + graphical_computer.get(0).getSentPackage(), 5, 15);
         g.drawString("Press tab to send Packages", 5, 30);
         g.drawString("Press key to mov your pc", 5, 45);
     }
@@ -175,9 +175,9 @@ public class Board extends JPanel implements ActionListener {
                         //
                         //
                         if(m.getDirection()<4){
-                            computerUnit.fire(m.getDirection()+4);
+                            computerUnit.fire(new WireLock(m.getDestination().getX()*-1, m.getDestination().getY()*-1));
                         } else {
-                            computerUnit.fire(m.getDirection()-4);
+                            computerUnit.fire(new WireLock(m.getDestination().getX()*-1, m.getDestination().getY()*-1));
                         }
                     }
                 }
