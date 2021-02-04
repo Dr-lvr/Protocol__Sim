@@ -174,11 +174,7 @@ public class Board extends JPanel implements ActionListener {
                         //manage packets then send it
                         //
                         //
-                        if(m.getDirection()<4){
-                            computerUnit.fire(new WireLock(m.getDestination().getX()*-1, m.getDestination().getY()*-1));
-                        } else {
-                            computerUnit.fire(new WireLock(m.getDestination().getX()*-1, m.getDestination().getY()*-1));
-                        }
+                        computerUnit.fire(new WireLock(m.getDestination().getX()*-1, m.getDestination().getY()*-1));
                     }
                 }
             }

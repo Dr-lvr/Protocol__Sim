@@ -125,7 +125,7 @@ public class Device extends Sprite {
         Random gen = new Random();
         if (key == KeyEvent.VK_SPACE) {
             ++sentPackage;
-            fire(new WireLock(gen.nextInt(100), gen.nextInt(100)));
+            fire(new WireLock(gen.nextInt(900), gen.nextInt(600)));
         }
         if (key == KeyEvent.VK_LEFT) {
             dx = -1;
