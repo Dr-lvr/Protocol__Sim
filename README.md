@@ -15,6 +15,7 @@ Connectivity Protocols simulator
 ## Class description:
 
 ###Board: 
+
 It is a JPanel, implements action Listener and aggregates a private KeyAdapter
   
 * private initBoard() : void
