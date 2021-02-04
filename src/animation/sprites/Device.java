@@ -41,7 +41,44 @@ public class Device extends Sprite {
             y = 1;
         }
     }
+    public void setPackageIn(Package packageUnit) {
+        //set first position
+        packageIn.addFirst(packageUnit);
+    }
+    public int getSentPackage() {
 
+        return sentPackage;
+    }
+    public void addConnection(int nLock, WireLock lock) {
+
+        wireLocks.get(nLock).setLocked(true);
+        this.connectionMap.put(wireLocks.get(nLock), lock);
+    }
+    public Package getPackageIn() throws NoSuchElementException{
+        //get last position
+        return packageIn.removeLast();
+    }
+    public List<Package> getPackageOut() {
+
+        return packageOut;
+    }
+    public Vector<WireLock> getLocks(){
+
+        return wireLocks;
+    }
+    public WireLock getRandomLock(){
+        Random gen = new Random();
+        for (Map.Entry<WireLock, WireLock> entry : connectionMap.entrySet()){
+            if(entry.getKey().isLocked()){
+                return entry.getValue();
+            }
+        }
+        return new WireLock(0, 0);
+    }
+    public Map<WireLock, WireLock> getConnectionMap() {
+
+        return connectionMap;
+    }
     //package spawner
     public void fire(WireLock destination) {
 
@@ -77,59 +114,12 @@ public class Device extends Sprite {
                 break;
         }
     }
-    /*
-    //package spawner
-    public void fire(int direction) {
-        //packages.add(new PackageUnit(x + width, y + height / 2));
-        switch(direction){
-            case 0:
-                packageOut.add(new Package(x - 30, y - 20, direction));
-                break;
-            case 1:
-                packageOut.add(new Package(x + width/2 - 15, y - 20, direction));
-                break;
-            case 2:
-                packageOut.add(new Package(x + width, y - 20, direction));
-                break;
-            case 3:
-                packageOut.add(new Package(x + width, y + height/2, direction));
-                break;
-            case 4:
-                packageOut.add(new Package(x + width, y + height, direction));
-                break;
-            case 5:
-                packageOut.add(new Package(x + width/2 - 15, y + height, direction));
-                break;
-            case 6:
-                packageOut.add(new Package(x -30, y + height, direction));
-                break;
-            case 7:
-                packageOut.add(new Package(x - 30, y + height/2, direction));
-                break;
-            default:
-                break;
-        }
-    }
-    */
-    public List<Package> getPackageOut() {
-
-        return packageOut;
-    }
-    public void setPackageIn(Package packageUnit) {
-        //set first position
-        packageIn.addFirst(packageUnit);
-    }
-    public Package getPackageIn() throws NoSuchElementException{
-        //get last position
-        return packageIn.removeLast();
-    }
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         //fire packets
-        Random gen = new Random();
         if (key == KeyEvent.VK_SPACE) {
             ++sentPackage;
-            fire(new WireLock(gen.nextInt(900), gen.nextInt(600)));
+            fire(getRandomLock());
         }
         if (key == KeyEvent.VK_LEFT) {
             dx = -1;
@@ -158,22 +148,6 @@ public class Device extends Sprite {
         if (key == KeyEvent.VK_DOWN) {
             dy = 0;
         }
-    }
-    public int getSentPackage() {
-
-        return sentPackage;
-    }
-    public Map<WireLock, WireLock> getConnectionMap() {
-
-        return connectionMap;
-    }
-    public void addConnection(int nLock, WireLock lock) {
-
-        this.connectionMap.put(wireLocks.get(nLock), lock);
-    }
-    public Vector<WireLock> getLocks(){
-
-        return wireLocks;
     }
     public void initWireLock(){
         //UP_LEFT, UP, UP_RIGHT, RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT

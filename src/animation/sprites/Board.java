@@ -94,7 +94,6 @@ public class Board extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
             running();
             updateNetwork();
             updatePackage();
@@ -173,7 +172,7 @@ public class Board extends JPanel implements ActionListener {
                         //manage packets then send it
                         //
                         //
-                        computerUnit.fire(new WireLock(m.getDestination().getX(), m.getDestination().getY()));
+                        computerUnit.fire(computerUnit.getRandomLock());
                     }
                 }
             }
