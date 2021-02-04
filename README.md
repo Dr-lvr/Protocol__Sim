@@ -61,29 +61,29 @@ It is the base sprite
 
 * public Sprite(int, int)
   
-construct the sprite by coordinates
+Construct the sprite by coordinates
 
 * protected getImageDimensions() : void
 
-get the sprite textures dimentions
+Get the sprite textures dimentions
 
-*protected loadImage(String ) : void
+* protected loadImage(String ) : void
 
-set image by local adress
+Set image by local address
+
+* public getBounds() : Rectangle
+
+Get a collider by sprite bounds
 
 * public getImage() : Image
-  
+
 * public getX() : int
-  
-*public getY() : int
 
-*public isVisible() : boolean
+* public getY() : int
 
-*public setVisible(Boolean) : void
+* public isVisible() : boolean
 
-*public getBounds() : Rectangle
-
-get a collider by sprite bounds
+* public setVisible(Boolean) : void
 
 
 
