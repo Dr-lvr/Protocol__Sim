@@ -14,7 +14,7 @@ Connectivity Multi Protocol simulator
 
 ## Class description:
 
-###Board: 
+##Board: 
 
 It is a JPanel, implements action Listener and aggregates a private KeyAdapter
   
@@ -55,7 +55,7 @@ Check Devices and update
 Check for collision between devices or between devices and
 packages
 
-###Sprite
+##Sprite
 
 It is the base sprite
 
