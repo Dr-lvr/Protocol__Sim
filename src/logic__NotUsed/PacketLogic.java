@@ -1,4 +1,4 @@
-package logic;
+package logic__NotUsed;
 
 public class PacketLogic {
 }

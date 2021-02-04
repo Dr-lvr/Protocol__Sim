@@ -1,6 +1,4 @@
-package logic;
-
-import logic.Controller;
+package logic__NotUsed;
 
 public class ComputerLogic {
 
