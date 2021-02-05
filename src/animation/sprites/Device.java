@@ -41,7 +41,6 @@ public class Device extends Sprite {
             y = 1;
         }
     }
-
     public void setPackageIn(Package packageUnit) {
         //set first position
         packageIn.addFirst(packageUnit);
@@ -88,7 +87,6 @@ public class Device extends Sprite {
     public WireLock getFirstConnection() throws NoSuchElementException{
         for (int i=0; i<wireLocks.size(); ++i){
             if(wireLocks.get(i).isLocked()){
-                System.out.println(connectionMap.get(wireLocks.get(i)));
                 return connectionMap.get(wireLocks.get(i));
             }
         }
@@ -97,7 +95,6 @@ public class Device extends Sprite {
     public WireLock getSecondConnection() throws NoSuchElementException{
         for (int i=wireLocks.size()-1; i>=0; --i){
             if(wireLocks.get(i).isLocked()){
-                System.out.println(connectionMap.get(wireLocks.get(i)));
                 return connectionMap.get(wireLocks.get(i));
             }
         }
