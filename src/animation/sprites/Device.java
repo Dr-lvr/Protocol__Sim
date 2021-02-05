@@ -1,5 +1,6 @@
 package animation.sprites;
 
+import a_provider.ConnectionMap;
 import a_provider.WireLock;
 
 import java.awt.*;
@@ -14,7 +15,8 @@ public class Device extends Sprite {
     private Vector<Package> packageOut;
     private Deque<Package> packageIn;//double ended queue
     private Vector<WireLock> wireLocks;
-    private Map<WireLock, WireLock> connectionMap;
+    //private Map<WireLock, WireLock> connectionMap;
+    private ConnectionMap myMap;
 
     private int sentPackage;
 
@@ -27,7 +29,8 @@ public class Device extends Sprite {
         packageOut = new Vector<>();
         //packageIn = new ArrayDeque<>();
         wireLocks = new Vector<>();
-        connectionMap = new HashMap<>();
+        //connectionMap = new HashMap<>();
+        myMap = new ConnectionMap();
         loadImage("src/a_images/computer-icon.png");
         getImageDimensions();
     }
@@ -52,7 +55,9 @@ public class Device extends Sprite {
     public void addConnection(int nLock, WireLock lock) {
 
         wireLocks.get(nLock).setLocked(true);
-        this.connectionMap.put(wireLocks.get(nLock), lock);
+        //this.connectionMap.put(wireLocks.get(nLock), lock);
+        this.myMap.setTheLock(wireLocks.get(nLock));
+        this.myMap.addConnection(lock);
     }
     /*
     public Package getPackageOut() throws NoSuchElementException{
@@ -68,42 +73,12 @@ public class Device extends Sprite {
 
         return wireLocks;
     }
-    public WireLock getFirstLock() throws NoSuchElementException{
-        for (int i=0; i<wireLocks.size(); ++i){
-            if(wireLocks.get(i).isLocked()){
-                return wireLocks.get(i);
-            }
-        }
-        throw new NoSuchElementException();
-    }
-    public WireLock getSecondLock() throws NoSuchElementException{
-        for (int i=wireLocks.size()-1; i>=0; --i){
-            if(wireLocks.get(i).isLocked()){
-                return wireLocks.get(i);
-            }
-        }
-        throw new NoSuchElementException();
-    }
-    public WireLock getFirstConnection() throws NoSuchElementException{
-        for (int i=0; i<wireLocks.size(); ++i){
-            if(wireLocks.get(i).isLocked()){
-                return connectionMap.get(wireLocks.get(i));
-            }
-        }
-        throw new NoSuchElementException();
-    }
-    public WireLock getSecondConnection() throws NoSuchElementException{
-        for (int i=wireLocks.size()-1; i>=0; --i){
-            if(wireLocks.get(i).isLocked()){
-                return connectionMap.get(wireLocks.get(i));
-            }
-        }
-        throw new NoSuchElementException();
-    }
+    /*
     public Map<WireLock, WireLock> getConnectionMap() {
 
         return connectionMap;
     }
+     */
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         //fire packets
@@ -143,9 +118,9 @@ public class Device extends Sprite {
     public void sendPacket() {
         Random gen = new Random();
         if(gen.nextBoolean()){
-            packageOut.add(new Package(getFirstLock(), getFirstConnection()));
+            packageOut.add(new Package(myMap.getTheLock(), myMap.getConnections().get(0)));
         } else {
-            packageOut.add(new Package(getSecondLock(), getSecondConnection()));
+            packageOut.add(new Package(myMap.getTheLock(), myMap.getConnections().get(1)));
         }
     }
     public void initWireLock(){

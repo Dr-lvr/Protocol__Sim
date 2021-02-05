@@ -69,9 +69,9 @@ public class Board extends JPanel implements ActionListener {
         for (Device gp : devices) {
             if (gp.isVisible()) {
                 g.drawImage(gp.getImage(), gp.getX(), gp.getY(), this);
-                for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
+                //for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
                     //g.drawLine(entry.getKey().getX(), entry.getKey().getY(), entry.getValue().getX(), entry.getValue().getY());
-                }
+               // }
             }
         }
         g.setColor(Color.black);
