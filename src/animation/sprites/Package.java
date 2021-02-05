@@ -1,5 +1,7 @@
 package animation.sprites;
 
+import a_provider.WireLock;
+
 import java.awt.*;
 
 public class Package extends Sprite {
@@ -7,24 +9,55 @@ public class Package extends Sprite {
     private final int BOARD_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     private final int PACKAGE_SPEED = 2;
 
-    private int direction;//must be Enum or a kind of
-    //this is a temporary solution, movement must be relative
-    //implemented by vectors ex. pack.go(a, b)
-    public Package(int x, int y) {
-        super(x, y);
+    private WireLock source;
+    private WireLock destination;
+
+    public Package(WireLock source, WireLock destination) {
+        super(source.getX(), source.getY());
+        this.destination = destination;
         initPackage();
-    }
-    public Package(int x, int y, int direction) {
-        super(x, y);
-        initPackage();
-        this.direction = direction;
     }
     private void initPackage() {
         loadImage("src/a_images/Package.png");
         getImageDimensions();
     }
+    public int getBehaviour(){
+        //the package is at the bottom right of the destination
+        if(x > destination.getX() && y > destination.getY()){
+            return 0;
+        }
+        //the package is at the bottom orthogonal to the destination
+        if(x == destination.getX() && y > destination.getY()){
+            return 1;
+        }
+        //the package is at the bottom left of the destination
+        if(x < destination.getX() && y > destination.getY()){
+            return 2;
+        }
+        //the package on the left orthogonal of the destination
+        if(x < destination.getX() && y == destination.getY()){
+            return 3;
+        }
+        //the package is on the hi left of the destination
+        if(x < destination.getX() && y < destination.getY()){
+            return 4;
+        }
+        //the package is at the top, orthogonal to the destination
+        if(x == destination.getX() && y < destination.getY()){
+            return 5;
+        }
+        //the package is at the top right to the destination
+        if(x > destination.getX() && y < destination.getY()){
+            return 6;
+        }
+        //the package on the right orthogonal to the destination
+        if(x > destination.getX() && y == destination.getY()){
+            return 7;
+        }
+        return -1;
+    }
     public void move() {
-        switch(getDirection()){
+        switch(getBehaviour()){
             case 0:
                 moveLeftUp();
                 break;
@@ -104,11 +137,5 @@ public class Package extends Sprite {
         if (x > BOARD_WIDTH){
             visible = false;
         }
-    }
-    public int getDirection() {
-        return direction;
-    }
-    public void setDirection(int direction) {
-        this.direction = direction;
     }
 }

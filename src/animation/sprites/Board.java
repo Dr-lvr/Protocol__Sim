@@ -1,6 +1,5 @@
 package animation.sprites;
 
-
 import a_provider.ConfigProvider;
 import a_provider.WireLock;
 
@@ -15,22 +14,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ConcurrentModificationException;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private Timer timer;
-    private Vector<Device> graphical_computer;
     private boolean isRunning;
-    private final int B_WIDTH = (int) screenSize.getWidth()- 200;
-    private final int B_HEIGHT = (int) screenSize.getHeight();
     private final int DELAY = 15;
+    private Vector<Device> devices;
+    private final int B_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth()- 200;
+    private final int B_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+
+    private int globalPackageSent;
 
     public Board() {
         initBoard();
@@ -41,7 +38,8 @@ public class Board extends JPanel implements ActionListener {
         setBackground(Color.WHITE);
         isRunning = true;
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
-        graphical_computer = ConfigProvider.getProviderInstance().getTokenRing();
+        //inject configuration
+        devices= ConfigProvider.getProviderInstance().getTokenRing();
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -51,13 +49,13 @@ public class Board extends JPanel implements ActionListener {
         if (isRunning) {
             drawObjects(g);
         } else {
-            drawGameOver(g);
+            drawExit(g);
         }
         Toolkit.getDefaultToolkit().sync();
     }
     private void drawObjects(Graphics g) {
         // draw network
-        for(Device g_cp : graphical_computer) {
+        for(Device g_cp : devices) {
             if (g_cp.isVisible()) {
                 g.drawImage(g_cp.getImage(), g_cp.getX(), g_cp.getY(),
                         this);
@@ -70,21 +68,22 @@ public class Board extends JPanel implements ActionListener {
                 }
             }
         }
-        for (Device gp : graphical_computer) {
+        for (Device gp : devices) {
             if (gp.isVisible()) {
                 g.drawImage(gp.getImage(), gp.getX(), gp.getY(), this);
-                for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
-                    g.drawLine(entry.getKey().getX(), entry.getKey().getY(), entry.getValue().getX(), entry.getValue().getY());
-                }
+                //for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
+                    //g.drawLine(entry.getKey().getX(), entry.getKey().getY(), entry.getValue().getX(), entry.getValue().getY());
+               // }
             }
         }
         g.setColor(Color.black);
-        g.drawString("Computers net: " + graphical_computer.get(0).getSentPackage(), 5, 15);
-        g.drawString("Press tab to send Packages", 5, 30);
-        g.drawString("Press key to mov your pc", 5, 45);
+        int sentPackage = devices.get(0).getSentPackage() + globalPackageSent;
+        g.drawString("Packages sent:  " + sentPackage, 5, 30);
+        g.drawString("Press tab to send Packages", 5, 45);
+        g.drawString("Press key to mov your pc", 5, 60);
     }
-    private void drawGameOver(Graphics g) {
-        String msg = "Game Over";
+    private void drawExit(Graphics g) {
+        String msg = "Exit";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fm = getFontMetrics(small);
         g.setColor(Color.BLACK);
@@ -97,13 +96,13 @@ public class Board extends JPanel implements ActionListener {
 
             running();
             updateNetwork();
+        try{
             updatePackage();
-            updateComputerUnits();
-        try {
-            checkCollisions();
-        } catch(ConcurrentModificationException cm){
-            cm.printStackTrace();
+        } catch(NoSuchElementException a){
+            a.printStackTrace();
         }
+            updateComputerUnits();
+            checkCollisions();
             repaint();
     }
     private void running() {
@@ -112,73 +111,68 @@ public class Board extends JPanel implements ActionListener {
         }
     }
     private void updateNetwork() {
-        for(Device g_cp : graphical_computer) {
+        for(Device g_cp : devices) {
             if (g_cp.isVisible()) {
                 g_cp.move();
             }
         }
     }
     private void updatePackage() {
-        for(Device g_cp : graphical_computer) {
+        for(Device g_cp : devices) {
             List<Package> ms = g_cp.getPackageOut();
             for (int i = 0; i < ms.size(); i++) {
                 Package m = ms.get(i);
                 if (m.isVisible()) {
-                    m.move();
+                    try{
+                        m.move();
+                    } catch(NoSuchElementException e){
+                        e.printStackTrace();
+                    }
                 } else {
-                    ms.remove(i);
+                    try{
+                        ms.remove(i);
+                    } catch(NoSuchElementException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }
     }
     private void updateComputerUnits() {
-        if (graphical_computer.isEmpty()) {
+        if (devices.isEmpty()) {
             isRunning = false;
             return;
         }
-        for (int i = 0; i < graphical_computer.size(); i++) {
-            Device a = graphical_computer.get(i);
+        for (int i=0; i < devices.size(); i++) {
+            Device a = devices.get(i);
             if (a.isVisible()) {
                 a.move();
             } else {
-                graphical_computer.remove(i);
+                devices.remove(i);
             }
         }
     }
-
     public void checkCollisions() {
-        /* collision between machines
-        Rectangle r3 = graphical_computer.getBounds();
-
-        for (Graphical_Computer computerUnit : theNetwork) {
-
-            Rectangle r2 = computerUnit.getBounds();
-
-            if (r3.intersects(r2)) {
-
-                graphical_computer.setVisible(false);
-                computerUnit.setVisible(false);
-                isRunning = false;
-            }
-        }*/
-        //Sender -> Package -> Receiver
-        for(Device g_cp : graphical_computer) {
+        //Sender -> Package -> Receiver -> LockCollision
+        for(Device g_cp : devices) {
             List<Package> ms = g_cp.getPackageOut();
             for (Package m : ms) {//<---------------
                 Rectangle r1 = m.getBounds();
-                for (Device computerUnit : graphical_computer) {
+                for (Device computerUnit : devices) {
+                    for (WireLock wl : computerUnit.getLocks()){
+                        if(r1.intersects(wl.getCollider())){
+                            //manage packages and send
+                            //
+                            //
+                            m.setVisible(false);
+                            computerUnit.sendPacket();
+                            ++globalPackageSent;
+                        }
+                    }
                     Rectangle r2 = computerUnit.getBounds();
                     if (r1.intersects(r2)) {
                         m.setVisible(false);
-                        //computerUnit.setVisible(false);
-                        //manage packets then send it
-                        //
-                        //
-                        if(m.getDirection()<4){
-                            computerUnit.fire(m.getDirection()+4);
-                        } else {
-                            computerUnit.fire(m.getDirection()-4);
-                        }
+                        computerUnit.sendPacket();
                     }
                 }
             }
@@ -188,12 +182,12 @@ public class Board extends JPanel implements ActionListener {
 
         @Override
         public void keyReleased(KeyEvent e) {
-            graphical_computer.get(0).keyReleased(e);
+            devices.get(0).keyReleased(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
-            graphical_computer.get(0).keyPressed(e);
+            devices.get(0).keyPressed(e);
         }
     }
 }

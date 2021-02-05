@@ -1,5 +1,7 @@
 package a_provider;
 
+import java.awt.*;
+
 public class WireLock {
 
     private int x, y;
@@ -26,5 +28,20 @@ public class WireLock {
     }
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public Rectangle getCollider(){
+        if(!this.isLocked()){
+            return new Rectangle(x, y, 30, 18);
+        }
+        return new Rectangle(0,0,0,0);//
+    }
+    @Override
+    public String toString(){
+        return "WireLock{"+
+                "x="+x+
+                ", y="+y+
+                ", locked="+locked+
+                '}';
     }
 }
