@@ -70,24 +70,23 @@ public class Device extends Sprite {
         return wireLocks;
     }
     public WireLock getFirstLock() throws NoSuchElementException{
-        for (WireLock entry : wireLocks){
-            if(entry.isLocked()){
-                System.out.println(connectionMap.get(entry));
-                return connectionMap.get(entry);
+        for (int i=0; i<wireLocks.size(); ++i){
+            if(wireLocks.get(i).isLocked()){
+                System.out.println(connectionMap.get(wireLocks.get(i)));
+                return connectionMap.get(wireLocks.get(i));
             }
         }
         throw new NoSuchElementException();
     }
-    /*
-    public WireLock getFirstLock() throws NoSuchElementException{
-        for (Map.Entry<WireLock, WireLock> entry : connectionMap.entrySet()){
-            if(entry.getKey().isLocked()){
-                System.out.println(entry.getValue());
-                return entry.getValue();
+    public WireLock getSecondLock() throws NoSuchElementException{
+        for (int i=wireLocks.size()-1; i>=0; --i){
+            if(wireLocks.get(i).isLocked()){
+                System.out.println(connectionMap.get(wireLocks.get(i)));
+                return connectionMap.get(wireLocks.get(i));
             }
         }
         throw new NoSuchElementException();
-    }*/
+    }
     public Map<WireLock, WireLock> getConnectionMap() {
 
         return connectionMap;
@@ -97,7 +96,7 @@ public class Device extends Sprite {
         //fire packets
         if (key == KeyEvent.VK_SPACE) {
             ++sentPackage;
-            fire();
+            sendPacket();
         }
         if (key == KeyEvent.VK_LEFT) {
             dx = -1;
@@ -128,11 +127,15 @@ public class Device extends Sprite {
         }
     }
     //package spawner
-    public void fire() {
-        //RandomGen get the source spawnLock(get it in the map)
-        //set the destination by the wired lock
-        WireLock lock = this.getFirstLock();
-        switch(new Package(0, 0, lock).getBehaviour()){
+    public void sendPacket() {
+        Random gen = new Random();
+        WireLock lock = new WireLock(0,0);
+        if(gen.nextBoolean()){
+            lock=this.getFirstLock();
+        } else {
+            lock=this.getSecondLock();
+        }
+        switch(new Package(dx, dy, lock).getBehaviour()){
         case 0:
             packageOut.add(new Package(x - 30, y - 20, lock));
             break;

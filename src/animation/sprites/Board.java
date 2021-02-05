@@ -155,7 +155,7 @@ public class Board extends JPanel implements ActionListener {
                         //manage packets then send it
                         //
                         //
-                        computerUnit.fire();
+                        computerUnit.sendPacket();
                     }
                 }
             }
