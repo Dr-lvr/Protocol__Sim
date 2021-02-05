@@ -25,7 +25,7 @@ public class Device extends Sprite {
     private void initCraft() {
         //packages = new ArrayList<>();
         packageOut = new Vector<>();
-        packageIn = new ArrayDeque<>();
+        //packageIn = new ArrayDeque<>();
         wireLocks = new Vector<>();
         connectionMap = new HashMap<>();
         loadImage("src/a_images/computer-icon.png");
@@ -41,6 +41,7 @@ public class Device extends Sprite {
             y = 1;
         }
     }
+
     public void setPackageIn(Package packageUnit) {
         //set first position
         packageIn.addFirst(packageUnit);
@@ -54,10 +55,12 @@ public class Device extends Sprite {
         wireLocks.get(nLock).setLocked(true);
         this.connectionMap.put(wireLocks.get(nLock), lock);
     }
-    public Package getPackageIn() throws NoSuchElementException{
+    /*
+    public Package getPackageOut() throws NoSuchElementException{
         //get last position
         return packageIn.removeLast();
     }
+    */
     public List<Package> getPackageOut() {
 
         return packageOut;
@@ -66,7 +69,17 @@ public class Device extends Sprite {
 
         return wireLocks;
     }
-    public WireLock getRandomLock() throws NoSuchElementException{
+    public WireLock getFirstLock() throws NoSuchElementException{
+        for (WireLock entry : wireLocks){
+            if(entry.isLocked()){
+                System.out.println(connectionMap.get(entry));
+                return connectionMap.get(entry);
+            }
+        }
+        throw new NoSuchElementException();
+    }
+    /*
+    public WireLock getFirstLock() throws NoSuchElementException{
         for (Map.Entry<WireLock, WireLock> entry : connectionMap.entrySet()){
             if(entry.getKey().isLocked()){
                 System.out.println(entry.getValue());
@@ -74,7 +87,7 @@ public class Device extends Sprite {
             }
         }
         throw new NoSuchElementException();
-    }
+    }*/
     public Map<WireLock, WireLock> getConnectionMap() {
 
         return connectionMap;
@@ -84,7 +97,7 @@ public class Device extends Sprite {
         //fire packets
         if (key == KeyEvent.VK_SPACE) {
             ++sentPackage;
-            fire(getRandomLock());
+            fire();
         }
         if (key == KeyEvent.VK_LEFT) {
             dx = -1;
@@ -115,34 +128,34 @@ public class Device extends Sprite {
         }
     }
     //package spawner
-    public void fire(WireLock destination) {
-
+    public void fire() {
         //RandomGen get the source spawnLock(get it in the map)
         //set the destination by the wired lock
-        switch(new Package(0, 0, destination).getBehaviour()){
+        WireLock lock = this.getFirstLock();
+        switch(new Package(0, 0, lock).getBehaviour()){
         case 0:
-            packageOut.add(new Package(x - 30, y - 20, destination));
+            packageOut.add(new Package(x - 30, y - 20, lock));
             break;
         case 1:
-            packageOut.add(new Package(x + width/2 - 15, y - 20, destination));
+            packageOut.add(new Package(x + width/2 - 15, y - 20, lock));
             break;
         case 2:
-            packageOut.add(new Package(x + width, y - 20, destination));
+            packageOut.add(new Package(x + width, y - 20, lock));
             break;
         case 3:
-            packageOut.add(new Package(x + width, y + height/2, destination));
+            packageOut.add(new Package(x + width, y + height/2, lock));
             break;
         case 4:
-            packageOut.add(new Package(x + width, y + height, destination));
+            packageOut.add(new Package(x + width, y + height, lock));
             break;
         case 5:
-            packageOut.add(new Package(x + width/2 - 15, y + height, destination));
+            packageOut.add(new Package(x + width/2 - 15, y + height, lock));
             break;
         case 6:
-            packageOut.add(new Package(x -30, y + height, destination));
+            packageOut.add(new Package(x -30, y + height, lock));
             break;
         case 7:
-            packageOut.add(new Package(x - 30, y + height/2, destination));
+            packageOut.add(new Package(x - 30, y + height/2, lock));
             break;
         default:
             break;

@@ -22,7 +22,7 @@ public class ConfigProvider {
     public Vector<Device> getTokenRing(){
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Vector<Device> theNetwork = new Vector<Device>();
+        Vector<Device> theNetwork = new Vector<>();
         theNetwork.add(new Device((int) screenSize.getWidth()/4 - 300, (int) screenSize.getHeight()/2 - 150));
         theNetwork.add(new Device((int) screenSize.getWidth()/2 - 300, (int) (screenSize.getHeight()/4) - 150));
         theNetwork.add(new Device((int) (screenSize.getWidth()/4)*3 - 300, (int) screenSize.getHeight()/2 - 150));
@@ -30,6 +30,7 @@ public class ConfigProvider {
         for(Device tn : theNetwork){
             tn.initWireLock();
         }
+        //device, lock, device, lock
         theNetwork.get(0).addConnection(2, theNetwork.get(1).getLocks().get(6));
         theNetwork.get(1).addConnection(6, theNetwork.get(0).getLocks().get(2));
         theNetwork.get(1).addConnection(4, theNetwork.get(2).getLocks().get(0));
