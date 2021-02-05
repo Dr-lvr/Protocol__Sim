@@ -27,6 +27,8 @@ public class Board extends JPanel implements ActionListener {
     private final int B_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth()- 200;
     private final int B_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
+    private int globalPackageSent;
+
     public Board() {
         initBoard();
     }
@@ -75,7 +77,8 @@ public class Board extends JPanel implements ActionListener {
             }
         }
         g.setColor(Color.black);
-        g.drawString("Packages sent:  " + devices.get(0).getSentPackage(), 5, 15);
+        int sentPackage = devices.get(0).getSentPackage() + globalPackageSent;
+        g.drawString("Packages sent:  " + sentPackage, 5, 15);
         g.drawString("Press tab to send Packages", 5, 30);
         g.drawString("Press key to mov your pc", 5, 45);
     }
@@ -90,15 +93,16 @@ public class Board extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
             running();
             updateNetwork();
+        try{
             updatePackage();
-            updateComputerUnits();
-        try {
-            checkCollisions();
-        } catch(ConcurrentModificationException cm){
-            cm.printStackTrace();
+        } catch(NoSuchElementException a){
+            a.printStackTrace();
         }
+            updateComputerUnits();
+            checkCollisions();
             repaint();
     }
     private void running() {
@@ -119,10 +123,17 @@ public class Board extends JPanel implements ActionListener {
             for (int i = 0; i < ms.size(); i++) {
                 Package m = ms.get(i);
                 if (m.isVisible()) {
-                    m.move();
+                    try{
+                        m.move();
+                    } catch(NoSuchElementException e){
+                        e.printStackTrace();
+                    }
                 } else {
-                    ms.remove(i);
-                    g_cp.getPackageOut().remove(i);
+                    try{
+                        ms.remove(i);
+                    } catch(NoSuchElementException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -155,6 +166,7 @@ public class Board extends JPanel implements ActionListener {
                             //
                             m.setVisible(false);
                             computerUnit.sendPacket();
+                            ++globalPackageSent;
                         }
                     }
                     Rectangle r2 = computerUnit.getBounds();
