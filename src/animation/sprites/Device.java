@@ -72,13 +72,29 @@ public class Device extends Sprite {
     public WireLock getFirstLock() throws NoSuchElementException{
         for (int i=0; i<wireLocks.size(); ++i){
             if(wireLocks.get(i).isLocked()){
+                return wireLocks.get(i);
+            }
+        }
+        throw new NoSuchElementException();
+    }
+    public WireLock getSecondLock() throws NoSuchElementException{
+        for (int i=wireLocks.size()-1; i>=0; --i){
+            if(wireLocks.get(i).isLocked()){
+                return wireLocks.get(i);
+            }
+        }
+        throw new NoSuchElementException();
+    }
+    public WireLock getFirstConnection() throws NoSuchElementException{
+        for (int i=0; i<wireLocks.size(); ++i){
+            if(wireLocks.get(i).isLocked()){
                 System.out.println(connectionMap.get(wireLocks.get(i)));
                 return connectionMap.get(wireLocks.get(i));
             }
         }
         throw new NoSuchElementException();
     }
-    public WireLock getSecondLock() throws NoSuchElementException{
+    public WireLock getSecondConnection() throws NoSuchElementException{
         for (int i=wireLocks.size()-1; i>=0; --i){
             if(wireLocks.get(i).isLocked()){
                 System.out.println(connectionMap.get(wireLocks.get(i)));
@@ -129,39 +145,10 @@ public class Device extends Sprite {
     //package spawner
     public void sendPacket() {
         Random gen = new Random();
-        WireLock lock = new WireLock(0,0);
         if(gen.nextBoolean()){
-            lock=this.getFirstLock();
+            packageOut.add(new Package(getFirstLock(), getFirstConnection()));
         } else {
-            lock=this.getSecondLock();
-        }
-        switch(new Package(dx, dy, lock).getBehaviour()){
-        case 0:
-            packageOut.add(new Package(x - 30, y - 20, lock));
-            break;
-        case 1:
-            packageOut.add(new Package(x + width/2 - 15, y - 20, lock));
-            break;
-        case 2:
-            packageOut.add(new Package(x + width, y - 20, lock));
-            break;
-        case 3:
-            packageOut.add(new Package(x + width, y + height/2, lock));
-            break;
-        case 4:
-            packageOut.add(new Package(x + width, y + height, lock));
-            break;
-        case 5:
-            packageOut.add(new Package(x + width/2 - 15, y + height, lock));
-            break;
-        case 6:
-            packageOut.add(new Package(x -30, y + height, lock));
-            break;
-        case 7:
-            packageOut.add(new Package(x - 30, y + height/2, lock));
-            break;
-        default:
-            break;
+            packageOut.add(new Package(getSecondLock(), getSecondConnection()));
         }
     }
     public void initWireLock(){
@@ -170,28 +157,28 @@ public class Device extends Sprite {
         for(int i=0; i<8; ++i){
             switch(i){
                 case 0:
-                    wireLocks.add(new WireLock(collider.x, collider.y));
+                    wireLocks.add(new WireLock(collider.x - 30, collider.y - 20));
                     break;
                 case 1:
-                    wireLocks.add(new WireLock(collider.x+collider.width/2, collider.y));
+                    wireLocks.add(new WireLock(collider.x + collider.width/2 - 15, collider.y - 20));
                     break;
                 case 2:
-                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y));
+                    wireLocks.add(new WireLock(collider.x + collider.width, collider.y - 20));
                     break;
                 case 3:
-                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y+collider.height/2));
+                    wireLocks.add(new WireLock(collider.x + collider.width, collider.y + collider.height/2));
                     break;
                 case 4:
-                    wireLocks.add(new WireLock(collider.x+collider.width, collider.y+collider.height));
+                    wireLocks.add(new WireLock(collider.x + collider.width, collider.y + collider.height));
                     break;
                 case 5:
-                    wireLocks.add(new WireLock(collider.x+collider.width/2, collider.y+collider.height));
+                    wireLocks.add(new WireLock(collider.x + collider.width/2 - 15, collider.y + collider.height));
                     break;
                 case 6:
-                    wireLocks.add(new WireLock(collider.x, collider.y+collider.height));
+                    wireLocks.add(new WireLock(collider.x -30, collider.y + collider.height));
                     break;
                 case 7:
-                    wireLocks.add(new WireLock(collider.x, collider.y+collider.height/2));
+                    wireLocks.add(new WireLock(collider.x - 30, collider.y + collider.height/2));
                     break;
                 default:
                     break;

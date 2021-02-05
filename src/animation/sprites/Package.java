@@ -12,6 +12,7 @@ public class Package extends Sprite {
     private int direction;//must be Enum or a kind of
     //this is a temporary solution, movement must be relative
     //implemented by vectors ex. pack.go(a, b)
+    private WireLock source;
     private WireLock destination;
 /*
     public Package(int x, int y) {
@@ -26,6 +27,11 @@ public class Package extends Sprite {
     }*/
     public Package(int x, int y, WireLock destination) {
         super(x, y);
+        this.destination = destination;
+        initPackage();
+    }
+    public Package(WireLock source, WireLock destination) {
+        super(source.getX(), source.getY());
         this.destination = destination;
         initPackage();
     }
