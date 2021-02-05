@@ -27,4 +27,13 @@ public class WireLock {
     public void setLocked(boolean locked) {
         this.locked = locked;
     }
+
+    @Override
+    public String toString(){
+        return "WireLock{"+
+                "x="+x+
+                ", y="+y+
+                ", locked="+locked+
+                '}';
+    }
 }

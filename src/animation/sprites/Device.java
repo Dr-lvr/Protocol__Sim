@@ -69,6 +69,7 @@ public class Device extends Sprite {
     public WireLock getRandomLock() throws NoSuchElementException{
         for (Map.Entry<WireLock, WireLock> entry : connectionMap.entrySet()){
             if(entry.getKey().isLocked()){
+                System.out.println(entry.getValue());
                 return entry.getValue();
             }
         }
@@ -118,7 +119,6 @@ public class Device extends Sprite {
 
         //RandomGen get the source spawnLock(get it in the map)
         //set the destination by the wired lock
-
         switch(new Package(0, 0, destination).getBehaviour()){
         case 0:
             packageOut.add(new Package(x - 30, y - 20, destination));
