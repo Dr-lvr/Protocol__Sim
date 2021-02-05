@@ -142,19 +142,24 @@ public class Board extends JPanel implements ActionListener {
         }
     }
     public void checkCollisions() {
-        //Sender -> Package -> Receiver
+        //Sender -> Package -> Receiver -> LockCollision
         for(Device g_cp : devices) {
             List<Package> ms = g_cp.getPackageOut();
             for (Package m : ms) {//<---------------
                 Rectangle r1 = m.getBounds();
                 for (Device computerUnit : devices) {
+                    for (WireLock wl : computerUnit.getLocks()){
+                        if(r1.intersects(wl.getCollider())){
+                            //manage packets then send it
+                            //
+                            //
+                            computerUnit.sendPacket();
+                            //m.setVisible(false);
+                        }
+                    }
                     Rectangle r2 = computerUnit.getBounds();
                     if (r1.intersects(r2)) {
                         m.setVisible(false);
-                        //computerUnit.setVisible(false);
-                        //manage packets then send it
-                        //
-                        //
                         computerUnit.sendPacket();
                     }
                 }
