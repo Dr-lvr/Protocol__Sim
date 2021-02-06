@@ -1,5 +1,11 @@
 # Protocol__Sim
-Connectivity Multi Protocol simulator 
+Connectivity Multi Protocol simulator
+
+##todo:
+* write some default configuration for demostration purposes
+* diversify devices (computer, hub, switch, router)
+* implement device status dialogs
+* implement connection simulations starting from the most obsolete (ex. via hubs)
 
 ## Class index:
 * Board
@@ -87,5 +93,46 @@ Get a collider by sprite bounds
 
 * public setVisible(Boolean) : void
 
+**Device**
+
+* private initCraft() : void
+
+Craft the device unit
+
+* public move() : void 
+
+Move device around using keys
+
+* public getPackageOut() : List<Package> 
+  
+Get list of package out
+
+* public getLocks() : Vector<WireLock>
+  
+Get device Locks
+
+* public getSentPackage() : int
+  
+Get number of package sent
+
+* public addConnection(int nLock, WireLock lock) : void
+  
+Add a connection
+
+* public keyPressed(KeyEvent e) : void 
+  
+On key pressed (Directionals keys mapped)
+
+* public keyReleased(KeyEvent e) : void 
+  
+On key released (Directionals mapped)
+
+* public sendPacket() : void
+  
+The packages spawner
+
+* public initWireLock() : void
+
+Initialize the Device Locks
 
 

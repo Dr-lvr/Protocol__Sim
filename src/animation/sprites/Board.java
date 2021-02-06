@@ -28,7 +28,7 @@ public class Board extends JPanel implements ActionListener {
     private final int B_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
     private int globalPackageSent;
-    //test
+
     public Board() {
         initBoard();
     }
@@ -97,7 +97,7 @@ public class Board extends JPanel implements ActionListener {
         } catch(NoSuchElementException a){
             a.printStackTrace();
         }
-            updateComputerUnits();
+            updateDevices();
             checkCollisions();
             repaint();
     }
@@ -134,7 +134,7 @@ public class Board extends JPanel implements ActionListener {
             }
         }
     }
-    private void updateComputerUnits() {
+    private void updateDevices() {
         if (devices.isEmpty()) {
             isRunning = false;
             return;
