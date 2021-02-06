@@ -95,7 +95,7 @@ Get a collider by sprite bounds
 
 * public setVisible(Boolean) : void
 
-**Device**
+**Device:Sprite**
 
 * private initCraft() : void
 
