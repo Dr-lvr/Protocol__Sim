@@ -6,13 +6,13 @@ import java.awt.*;
 
 public class Package extends Sprite {
 
-    private final int BOARD_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-    private final int PACKAGE_SPEED = 2;
-
     private WireLock source;
     private WireLock destination;
+    private final int PACKAGE_SPEED = 2;
+    private final int BOARD_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 
     public Package(WireLock source, WireLock destination) {
+        //to avoid ambiguity the package is constructible only with start and destination locks
         super(source.getX(), source.getY());
         this.destination = destination;
         initPackage();
@@ -20,41 +20,6 @@ public class Package extends Sprite {
     private void initPackage() {
         loadImage("src/a_images/Package.png");
         getImageDimensions();
-    }
-    public int getBehaviour(){
-        //the package is at the bottom right of the destination
-        if(x > destination.getX() && y > destination.getY()){
-            return 0;
-        }
-        //the package is at the bottom orthogonal to the destination
-        if(x == destination.getX() && y > destination.getY()){
-            return 1;
-        }
-        //the package is at the bottom left of the destination
-        if(x < destination.getX() && y > destination.getY()){
-            return 2;
-        }
-        //the package on the left orthogonal of the destination
-        if(x < destination.getX() && y == destination.getY()){
-            return 3;
-        }
-        //the package is on the hi left of the destination
-        if(x < destination.getX() && y < destination.getY()){
-            return 4;
-        }
-        //the package is at the top, orthogonal to the destination
-        if(x == destination.getX() && y < destination.getY()){
-            return 5;
-        }
-        //the package is at the top right to the destination
-        if(x > destination.getX() && y < destination.getY()){
-            return 6;
-        }
-        //the package on the right orthogonal to the destination
-        if(x > destination.getX() && y == destination.getY()){
-            return 7;
-        }
-        return -1;
     }
     public void move() {
         switch(getBehaviour()){
@@ -137,5 +102,40 @@ public class Package extends Sprite {
         if (x > BOARD_WIDTH){
             visible = false;
         }
+    }
+    public int getBehaviour(){
+        //the package is at the bottom right of the destination
+        if(x > destination.getX() && y > destination.getY()){
+            return 0;
+        }
+        //the package is at the bottom orthogonal to the destination
+        if(x == destination.getX() && y > destination.getY()){
+            return 1;
+        }
+        //the package is at the bottom left of the destination
+        if(x < destination.getX() && y > destination.getY()){
+            return 2;
+        }
+        //the package on the left orthogonal of the destination
+        if(x < destination.getX() && y == destination.getY()){
+            return 3;
+        }
+        //the package is on the hi left of the destination
+        if(x < destination.getX() && y < destination.getY()){
+            return 4;
+        }
+        //the package is at the top, orthogonal to the destination
+        if(x == destination.getX() && y < destination.getY()){
+            return 5;
+        }
+        //the package is at the top right to the destination
+        if(x > destination.getX() && y < destination.getY()){
+            return 6;
+        }
+        //the package on the right orthogonal to the destination
+        if(x > destination.getX() && y == destination.getY()){
+            return 7;
+        }
+        return -1;
     }
 }

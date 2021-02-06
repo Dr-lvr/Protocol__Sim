@@ -39,7 +39,7 @@ public class Board extends JPanel implements ActionListener {
         isRunning = true;
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         //inject configuration
-        devices= ConfigProvider.getProviderInstance().getTokenRing();
+        devices = ConfigProvider.getProviderInstance().getTokenRing();
         timer = new Timer(DELAY, this);
         timer.start();
     }
@@ -55,25 +55,22 @@ public class Board extends JPanel implements ActionListener {
     }
     private void drawObjects(Graphics g) {
         // draw network
-        for(Device g_cp : devices) {
-            if (g_cp.isVisible()) {
-                g.drawImage(g_cp.getImage(), g_cp.getX(), g_cp.getY(),
+        for(Device device : devices) {
+            if (device.isVisible()) {
+                g.drawImage(device.getImage(), device.getX(), device.getY(),
                         this);
             }
-            List<Package> ms = g_cp.getPackageOut();
-            for (Package aPackage : ms) {
+            List<Package> packageOut = device.getPackageOut();
+            for (Package aPackage : packageOut) {
                 if (aPackage.isVisible()) {
                     g.drawImage(aPackage.getImage(), aPackage.getX(),
                             aPackage.getY(), this);
                 }
             }
         }
-        for (Device gp : devices) {
-            if (gp.isVisible()) {
-                g.drawImage(gp.getImage(), gp.getX(), gp.getY(), this);
-                //for (Map.Entry<WireLock, WireLock> entry : gp.getConnectionMap().entrySet()) {
-                    //g.drawLine(entry.getKey().getX(), entry.getKey().getY(), entry.getValue().getX(), entry.getValue().getY());
-               // }
+        for (Device device : devices) {
+            if (device.isVisible()) {
+                g.drawImage(device.getImage(), device.getX(), device.getY(), this);
             }
         }
         g.setColor(Color.black);
@@ -93,7 +90,6 @@ public class Board extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
             running();
             updateNetwork();
         try{
@@ -111,26 +107,26 @@ public class Board extends JPanel implements ActionListener {
         }
     }
     private void updateNetwork() {
-        for(Device g_cp : devices) {
-            if (g_cp.isVisible()) {
-                g_cp.move();
+        for(Device device : devices) {
+            if (device.isVisible()) {
+                device.move();
             }
         }
     }
     private void updatePackage() {
         for(Device g_cp : devices) {
-            List<Package> ms = g_cp.getPackageOut();
-            for (int i = 0; i < ms.size(); i++) {
-                Package m = ms.get(i);
-                if (m.isVisible()) {
+            List<Package> packageOut = g_cp.getPackageOut();
+            for (int i = 0; i < packageOut.size(); i++) {
+                Package aPackage = packageOut.get(i);
+                if (aPackage.isVisible()) {
                     try{
-                        m.move();
+                        aPackage.move();
                     } catch(NoSuchElementException e){
                         e.printStackTrace();
                     }
                 } else {
                     try{
-                        ms.remove(i);
+                        packageOut.remove(i);
                     } catch(NoSuchElementException e){
                         e.printStackTrace();
                     }
@@ -144,9 +140,9 @@ public class Board extends JPanel implements ActionListener {
             return;
         }
         for (int i=0; i < devices.size(); i++) {
-            Device a = devices.get(i);
-            if (a.isVisible()) {
-                a.move();
+            Device device = devices.get(i);
+            if (device.isVisible()) {
+                device.move();
             } else {
                 devices.remove(i);
             }
@@ -154,25 +150,25 @@ public class Board extends JPanel implements ActionListener {
     }
     public void checkCollisions() {
         //Sender -> Package -> Receiver -> LockCollision
-        for(Device g_cp : devices) {
-            List<Package> ms = g_cp.getPackageOut();
-            for (Package m : ms) {//<---------------
-                Rectangle r1 = m.getBounds();
-                for (Device computerUnit : devices) {
-                    for (WireLock wl : computerUnit.getLocks()){
-                        if(r1.intersects(wl.getCollider())){
+        for(Device device : devices) {
+            List<Package> packageOut = device.getPackageOut();
+            for (Package aPackage : packageOut) {//<---------------
+                Rectangle r1 = aPackage.getBounds();
+                for (Device device1 : devices) {
+                    for (WireLock wireLock : device1.getLocks()){
+                        if(r1.intersects(wireLock.getCollider())){
                             //manage packages and send
                             //
                             //
-                            m.setVisible(false);
-                            computerUnit.sendPacket();
+                            aPackage.setVisible(false);
+                            device1.sendPacket();
                             ++globalPackageSent;
                         }
                     }
-                    Rectangle r2 = computerUnit.getBounds();
+                    Rectangle r2 = device1.getBounds();
                     if (r1.intersects(r2)) {
-                        m.setVisible(false);
-                        computerUnit.sendPacket();
+                        aPackage.setVisible(false);
+                        device1.sendPacket();
                     }
                 }
             }
