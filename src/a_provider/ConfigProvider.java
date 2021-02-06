@@ -19,6 +19,7 @@ public class ConfigProvider {
         }
         return theProvider;
     }
+
     public Vector<Device> getTokenRing(){
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
