@@ -21,7 +21,6 @@ so that it can be easy to implement more complex mechanisms
 * Sprite
 * Device
 * Package
-* enum Direction
 * WireLock
 * ConfigProvider
 * User_Interface
