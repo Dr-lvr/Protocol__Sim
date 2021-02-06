@@ -28,7 +28,7 @@ public class Board extends JPanel implements ActionListener {
     private final int B_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
     private int globalPackageSent;
-
+    //test
     public Board() {
         initBoard();
     }
