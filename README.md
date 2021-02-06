@@ -1,7 +1,14 @@
-# Protocol__Sim
-The network simulator is a small framework that can allow you to implement networking logics in a simulative java environment
+###TEST the PRE-RELEASE!
 
-I tried to make the mechanics as simple and flexible as possible so that I can freely implement more complex mechanisms (protocols, devices, real-time query)
+The test simply consists of an executable in java 1.8
+
+# Protocol__Sim
+The network simulator is a small framework that can allow
+to implement networking logics in a simulative java environment
+
+I tried to make the mechanics as simple and flexible as possible 
+so that it can be easy to implement more complex mechanisms 
+(protocols, devices, real-time query)
 
 ##todo:
 * write some default configuration for demostration purposes
