@@ -76,7 +76,7 @@ public class Board extends JPanel implements ActionListener {
         g.setColor(Color.black);
         int sentPackage = devices.get(0).getSentPackage() + globalPackageSent;
         g.drawString("Packages sent:  " + sentPackage, 5, 30);
-        g.drawString("Press tab to send Packages", 5, 45);
+        g.drawString("Press space to send Packages", 5, 45);
         //g.drawString("Press key to mov your pc", 5, 60); interdict for the executable version DO NOT DELETE
     }
     private void drawExit(Graphics g) {
