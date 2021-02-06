@@ -28,6 +28,7 @@ public class Device extends Sprite {
         loadImage("src/a_images/computer-icon.png");
         getImageDimensions();
     }
+    /* interdict for the executable version DO NOT DELETE
     public void move() {
         x += dx;
         y += dy;
@@ -38,6 +39,7 @@ public class Device extends Sprite {
             y = 1;
         }
     }
+     */
     public List<Package> getPackageOut() {
 
         return packageOut;

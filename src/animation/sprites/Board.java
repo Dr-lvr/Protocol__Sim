@@ -24,8 +24,8 @@ public class Board extends JPanel implements ActionListener {
     private boolean isRunning;
     private final int DELAY = 15;
     private Vector<Device> devices;
-    private final int B_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth()- 200;
-    private final int B_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+    private final int B_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth()- 430;
+    private final int B_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight()-150;
 
     private int globalPackageSent;
 
@@ -109,7 +109,7 @@ public class Board extends JPanel implements ActionListener {
     private void updateNetwork() {
         for(Device device : devices) {
             if (device.isVisible()) {
-                device.move();
+                //device.move(); interdict for the executable version DO NOT DELETE
             }
         }
     }
@@ -142,7 +142,7 @@ public class Board extends JPanel implements ActionListener {
         for (int i=0; i < devices.size(); i++) {
             Device device = devices.get(i);
             if (device.isVisible()) {
-                device.move();
+                //device.move(); interdict for the executable version DO NOT DELETE
             } else {
                 devices.remove(i);
             }
