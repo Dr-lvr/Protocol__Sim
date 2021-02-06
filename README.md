@@ -1,5 +1,7 @@
 # Protocol__Sim
-Connectivity Multi Protocol simulator
+The network simulator is a small framework that can allow you to implement networking logics in a simulative java environment
+
+I tried to make the mechanics as simple and flexible as possible so that I can freely implement more complex mechanisms (protocols, devices, real-time query)
 
 ##todo:
 * write some default configuration for demostration purposes
