@@ -13,23 +13,17 @@ public class Device extends Sprite {
     private int dy;
 
     private Vector<Package> packageOut;
-    private Deque<Package> packageIn;//double ended queue
     private Vector<WireLock> wireLocks;
-    //private Map<WireLock, WireLock> connectionMap;
     private ConnectionMap myMap;
-
-    private int sentPackage;
+    private int sentPackage;//counter
 
     public Device(int x, int y) {
         super(x, y);
         initCraft();
     }
     private void initCraft() {
-        //packages = new ArrayList<>();
         packageOut = new Vector<>();
-        //packageIn = new ArrayDeque<>();
         wireLocks = new Vector<>();
-        //connectionMap = new HashMap<>();
         myMap = new ConnectionMap();
         loadImage("src/a_images/computer-icon.png");
         getImageDimensions();
@@ -44,27 +38,6 @@ public class Device extends Sprite {
             y = 1;
         }
     }
-    public void setPackageIn(Package packageUnit) {
-        //set first position
-        packageIn.addFirst(packageUnit);
-    }
-    public int getSentPackage() {
-
-        return sentPackage;
-    }
-    public void addConnection(int nLock, WireLock lock) {
-
-        wireLocks.get(nLock).setLocked(true);
-        //this.connectionMap.put(wireLocks.get(nLock), lock);
-        this.myMap.setTheLock(wireLocks.get(nLock));
-        this.myMap.addConnection(lock);
-    }
-    /*
-    public Package getPackageOut() throws NoSuchElementException{
-        //get last position
-        return packageIn.removeLast();
-    }
-    */
     public List<Package> getPackageOut() {
 
         return packageOut;
@@ -73,12 +46,15 @@ public class Device extends Sprite {
 
         return wireLocks;
     }
-    /*
-    public Map<WireLock, WireLock> getConnectionMap() {
+    public int getSentPackage() {
 
-        return connectionMap;
+        return sentPackage;
     }
-     */
+    public void addConnection(int nLock, WireLock lock) {
+        wireLocks.get(nLock).setLocked(true);
+        this.myMap.setTheLock(wireLocks.get(nLock));
+        this.myMap.addConnection(lock);
+    }
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         //fire packets
@@ -117,6 +93,7 @@ public class Device extends Sprite {
     //package spawner
     public void sendPacket() {
         Random gen = new Random();
+        //package out add package(source, destination)
         if(gen.nextBoolean()){
             packageOut.add(new Package(myMap.getTheLock(), myMap.getConnections().get(0)));
         } else {
