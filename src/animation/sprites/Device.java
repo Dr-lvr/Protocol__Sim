@@ -19,14 +19,11 @@ public class Device extends Sprite {
 
     public Device(int x, int y, String imageSource) {
         super(x, y);
-        initCraft();
-        loadImage(imageSource);
-        getImageDimensions();
-    }
-    private void initCraft() {
         packageOut = new Vector<>();
         wireLocks = new Vector<>();
         myMap = new ConnectionMap();
+        loadImage(imageSource);
+        getImageDimensions();
     }
     /* interdict for the executable version DO NOT DELETE
     public void move() {
