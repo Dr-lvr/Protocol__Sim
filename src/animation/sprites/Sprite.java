@@ -28,13 +28,13 @@ public abstract class Sprite {
     protected void loadImage(String imageSource) {
 
         //default images scaling
-        ImageIcon ii = new ImageIcon(imageSource);
+        ImageIcon imageIcon = new ImageIcon(imageSource);
         if(this instanceof Device){
-            image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-            ii = new ImageIcon(image);
+            image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+            imageIcon = new ImageIcon(image);
         } else if (this instanceof Package){
-            image = ii.getImage().getScaledInstance(30, 18, Image.SCALE_DEFAULT);
-            ii = new ImageIcon(image);
+            image = imageIcon.getImage().getScaledInstance(30, 18, Image.SCALE_DEFAULT);
+            imageIcon = new ImageIcon(image);
         }
     }
     public Image getImage() {
