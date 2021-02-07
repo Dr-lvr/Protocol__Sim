@@ -57,8 +57,18 @@ public class Board extends JPanel implements ActionListener {
         // draw network
         for(Device device : devices) {
             if (device.isVisible()) {
-                g.drawImage(device.getImage(), device.getX(), device.getY(),
-                        this);
+                g.drawImage(device.getImage(), device.getX(), device.getY(), this);
+
+                //show device collider
+                //g.drawRect(device.getX(), device.getY(), device.getWidth(), device.getWidth());
+                //show lock collider
+                /*
+                for (WireLock wireLock : device.getLocks()){
+                    g.drawRect(wireLock.getX(), wireLock.getY(),
+                            (int) wireLock.getCollider().getWidth(), (int) wireLock.getCollider().getHeight());
+                }
+
+                 */
             }
             List<Package> packageOut = device.getPackageOut();
             for (Package aPackage : packageOut) {

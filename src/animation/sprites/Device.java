@@ -105,13 +105,13 @@ public class Device extends Sprite {
         for(int i=0; i<8; ++i){
             switch(i){
                 case 0:
-                    wireLocks.add(new WireLock(collider.x - 30, collider.y - 20));
+                    wireLocks.add(new WireLock(collider.x - 30, collider.y - 18));
                     break;
                 case 1:
-                    wireLocks.add(new WireLock(collider.x + collider.width/2 - 15, collider.y - 20));
+                    wireLocks.add(new WireLock(collider.x + collider.width/2 - 15, collider.y - 18));
                     break;
                 case 2:
-                    wireLocks.add(new WireLock(collider.x + collider.width, collider.y - 20));
+                    wireLocks.add(new WireLock(collider.x + collider.width, collider.y - 18));
                     break;
                 case 3:
                     wireLocks.add(new WireLock(collider.x + collider.width, collider.y + collider.height/2));

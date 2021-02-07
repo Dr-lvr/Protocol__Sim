@@ -2,9 +2,9 @@ package animation.sprites;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
-public class Sprite {
+public abstract class Sprite {
 
     protected int x;
     protected int y;
@@ -24,10 +24,18 @@ public class Sprite {
         width = image.getWidth(null);
         height = image.getHeight(null);
     }
-    protected void loadImage(String imageName) {
 
-        ImageIcon ii = new ImageIcon(imageName);
-        image = ii.getImage();
+    protected void loadImage(String imageSource) {
+
+        //default images scaling
+        ImageIcon ii = new ImageIcon(imageSource);
+        if(this instanceof Device){
+            image = ii.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+            ii = new ImageIcon(image);
+        } else if (this instanceof Package){
+            image = ii.getImage().getScaledInstance(30, 18, Image.SCALE_DEFAULT);
+            ii = new ImageIcon(image);
+        }
     }
     public Image getImage() {
         return image;
@@ -37,6 +45,12 @@ public class Sprite {
     }
     public int getY() {
         return y;
+    }
+    public int getWidth(){
+        return width;
+    }
+    public int getHeight(){
+        return height;
     }
     public boolean isVisible() {
         return visible;
