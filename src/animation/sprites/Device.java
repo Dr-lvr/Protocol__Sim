@@ -17,16 +17,16 @@ public class Device extends Sprite {
     private ConnectionMap myMap;
     private int sentPackage;//counter
 
-    public Device(int x, int y) {
+    public Device(int x, int y, String imageSource) {
         super(x, y);
         initCraft();
+        loadImage(imageSource);
+        getImageDimensions();
     }
     private void initCraft() {
         packageOut = new Vector<>();
         wireLocks = new Vector<>();
         myMap = new ConnectionMap();
-        loadImage("src/a_images/computer-icon.png");
-        getImageDimensions();
     }
     /* interdict for the executable version DO NOT DELETE
     public void move() {
