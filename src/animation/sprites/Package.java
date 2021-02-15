@@ -10,6 +10,7 @@ public class Package extends Sprite {
     private WireLock destination;
     private final int PACKAGE_SPEED = 2;
     private final int BOARD_WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    private boolean message;
 
     public Package(WireLock source, WireLock destination) {
         //to avoid ambiguity the package is constructible only with start and destination locks
@@ -20,6 +21,12 @@ public class Package extends Sprite {
     private void initPackage() {
         loadImage("src/a_images/Package.png");
         getImageDimensions();
+    }
+    public void setMessage(boolean message){
+        this.message=message;
+    }
+    public boolean getMessage(){
+        return message;
     }
     public void move() {
         switch(getBehaviour()){

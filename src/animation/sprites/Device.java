@@ -97,6 +97,21 @@ public class Device extends Sprite {
             packageOut.add(new Package(myMap.getTheLock(), myMap.getConnections().get(0)));
         } else {
             packageOut.add(new Package(myMap.getTheLock(), myMap.getConnections().get(1)));
+            //andrea
+        }
+        //andrea
+        if(gen.nextBoolean()){
+            packageOut.get(packageOut.size()-1).setMessage(true);
+        }else{
+            packageOut.get(packageOut.size()-1).setMessage(false);
+        }//
+    }
+
+    public boolean recivePacket(Package packet){
+        if(packet.getMessage()) {
+            return false;
+        }else{
+            return true;
         }
     }
     public void initWireLock(){

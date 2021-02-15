@@ -168,11 +168,13 @@ public class Board extends JPanel implements ActionListener {
                     for (WireLock wireLock : device1.getLocks()){
                         if(r1.intersects(wireLock.getCollider())){
                             //manage packages and send
+                            if(device1.recivePacket(aPackage)){
+                                aPackage.setVisible(false);
+                                device1.sendPacket();
+                                ++globalPackageSent;
+                            }
                             //
-                            //
-                            aPackage.setVisible(false);
-                            device1.sendPacket();
-                            ++globalPackageSent;
+
                         }
                     }
                     Rectangle r2 = device1.getBounds();
