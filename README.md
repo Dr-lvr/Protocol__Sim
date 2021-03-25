@@ -1,4 +1,4 @@
-###TEST the PRE-RELEASE!
+# TEST the PRE-RELEASE!
 
 The test simply consists of an executable in java 1.8
 
