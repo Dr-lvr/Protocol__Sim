@@ -1,146 +1,130 @@
-# TEST the PRE-RELEASE!
-
-The test simply consists of an executable in java 1.8
-
 # Protocol__Sim
-The network simulator is a small framework that can allow
-to implement networking logics in a simulative java environment
 
-I tried to make the mechanics as simple and flexible as possible 
-so that it can be easy to implement more complex mechanisms 
-(protocols, devices, real-time query)
+**Protocol__Sim** is a lightweight network simulator framework that allows you to implement networking logic inside a simulated Java environment.
 
-##todo:
-* write some default configuration for demostration purposes
-* diversify devices (computer, hub, switch, router)
-* implement device status dialogs
-* implement connection simulations starting from the most obsolete (ex. via hubs)
+The goal is to keep the mechanics **simple, modular, and flexible**, making it straightforward to extend the system with more complex behaviors (protocols, devices, real-time queries, etc.).
 
-## Class index:
-* Board
-* Sprite
-* Device
-* Package
-* WireLock
-* ConfigProvider
-* User_Interface
-* Main
+---
 
-## Class description:
+## ✅ TODO List
 
+- [ ] Write default configurations for demonstration purposes  
+- [ ] Diversify device types (computer, hub, switch, router)  
+- [ ] Implement device status dialogs  
+- [ ] Implement connection simulations starting from the most obsolete (e.g., hubs)  
 
-**Board**: 
+---
 
-It is a JPanel, implements action Listener and aggregates a private KeyAdapter
-  
-* private initBoard() : void
+## Class Index
 
-Utility method for object construction
+- `Board`  
+- `Sprite`  
+- `Device`  
+- `Package`  
+- `WireLock`  
+- `ConfigProvider`  
+- `User_Interface`  
+- `Main`
 
-* public paintComponent(Graphics) : void
+---
 
-Override the super method paintComponent use drawObjects
+# Class Descriptions
 
-* private drawObjects(Graphics) : void
+---
 
-Physically draw board components
+## **Board**
 
-* public actionPerformed(ActionEvent) : void
+A `JPanel` that implements `ActionListener` and aggregates a private `KeyAdapter`.
 
-The loop routine
+### Methods
 
-* private running() : void
+- **`private initBoard(): void`**  
+  Utility method for initializing the board.
 
-Check internally isRunning
+- **`public paintComponent(Graphics): void`**  
+  Overrides `paintComponent` and uses `drawObjects`.
 
-* private updateNetwork() : void
+- **`private drawObjects(Graphics): void`**  
+  Renders all board components.
 
-Check moved devices and update
+- **`public actionPerformed(ActionEvent): void`**  
+  Main loop routine.
 
-* private updatePackage() : void
+- **`private running(): void`**  
+  Checks whether the simulation is running.
 
-Check moved package and update
+- **`private updateNetwork(): void`**  
+  Updates devices with movement changes.
 
-* private updateComputerUnits() : void
+- **`private updatePackage(): void`**  
+  Updates moving packages.
 
-Check Devices and update
+- **`private updateComputerUnits(): void`**  
+  Updates device state.
 
-* public checkCollisions() : void
+- **`public checkCollisions(): void`**  
+  Detects collisions between devices or between devices and packages.
 
-Check for collision between devices or between devices and
-packages
+---
 
+## **Sprite**
 
-**Sprite**
+Base class for all drawable entities.
 
-It is the base sprite
+### Methods
 
-* public Sprite(int, int)
-  
-Construct the sprite by coordinates
+- **`public Sprite(int x, int y)`**  
+  Constructs sprite at coordinates.
 
-* protected getImageDimensions() : void
+- **`protected getImageDimensions(): void`**  
+  Gets texture dimensions.
 
-Get the sprite textures dimentions
+- **`protected loadImage(String path): void`**  
+  Loads an image from local path.
 
-* protected loadImage(String ) : void
+- **`public getBounds(): Rectangle`**  
+  Returns bounding box for collision detection.
 
-Set image by local address
+- `public getImage(): Image`  
+- `public getX(): int`  
+- `public getY(): int`  
+- `public isVisible(): boolean`  
+- `public setVisible(Boolean): void`  
 
-* public getBounds() : Rectangle
+---
 
-Get a collider by sprite bounds
+## **Device extends Sprite**
 
-* public getImage() : Image
+Represents a network device with movement, connections, and packet-handling abilities.
 
-* public getX() : int
+### Methods
 
-* public getY() : int
+- **`private initCraft(): void`**  
+  Initializes device internals.
 
-* public isVisible() : boolean
+- **`public move(): void`**  
+  Moves the device using keyboard input.
 
-* public setVisible(Boolean) : void
+- **`public getPackageOut(): List<Package>`**  
+  Returns list of outgoing packages.
 
-**Device:Sprite**
+- **`public getLocks(): Vector<WireLock>`**  
+  Returns associated locks.
 
-* private initCraft() : void
+- **`public getSentPackage(): int`**  
+  Number of sent packages.
 
-Craft the device unit
+- **`public addConnection(int nLock, WireLock lock): void`**  
+  Adds a connection.
 
-* public move() : void 
+- **`public keyPressed(KeyEvent e): void`**  
+  Handles directional key presses.
 
-Move device around using keys
+- **`public keyReleased(KeyEvent e): void`**  
+  Handles directional key releases.
 
-* public getPackageOut() : List<Package> 
-  
-Get list of package out
+- **`public sendPacket(): void`**  
+  Spawns and sends a packet.
 
-* public getLocks() : Vector<WireLock>
-  
-Get device Locks
-
-* public getSentPackage() : int
-  
-Get number of package sent
-
-* public addConnection(int nLock, WireLock lock) : void
-  
-Add a connection
-
-* public keyPressed(KeyEvent e) : void 
-  
-On key pressed (Directionals keys mapped)
-
-* public keyReleased(KeyEvent e) : void 
-  
-On key released (Directionals mapped)
-
-* public sendPacket() : void
-  
-The packages spawner
-
-* public initWireLock() : void
-
-Initialize the Device Locks
-
-
+- **`public initWireLock(): void`**  
+  Initializes device locks.
