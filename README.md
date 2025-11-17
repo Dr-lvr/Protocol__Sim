@@ -4,16 +4,7 @@
 
 The goal is to keep the mechanics **simple, modular, and flexible**, making it straightforward to extend the system with more complex behaviors (protocols, devices, real-time queries, etc.).
 
----
-
-## ✅ TODO List
-
-- [ ] Write default configurations for demonstration purposes  
-- [ ] Diversify device types (computer, hub, switch, router)  
-- [ ] Implement device status dialogs  
-- [ ] Implement connection simulations starting from the most obsolete (e.g., hubs)  
-
----
+--
 
 ## Class Index
 
